@@ -724,6 +724,10 @@ function buildLogEntries(data) {
     .slice(0, 24);
 }
 
+function activeCommandCount(commands) {
+  return commands.filter((command) => ["queued", "dispatched"].includes(command.status)).length;
+}
+
 function renderLogRows(entries) {
   return `
     <div class="log-list">
@@ -750,11 +754,12 @@ function renderLogRows(entries) {
 function renderSidebar(data) {
   const liveTone = data.overview.hasLiveData ? "good" : "warn";
   const liveLabel = data.overview.hasLiveData ? "Станции на связи" : "Ожидание станции";
+  const totalReactors = data.overview.totalReactors || SHOWCASE_LEVELS.length;
 
   sidebarNavNode.innerHTML = `
     <div class="sidebar__status">
       <span class="${stateToneClass(liveTone)}">${liveLabel}</span>
-      <span class="sidebar__status-copy">${data.overview.totalStations} станц. / ${data.overview.totalReactors} реакторов</span>
+      <span class="sidebar__status-copy">${data.overview.totalStations} станц. / ${totalReactors} реакторов</span>
     </div>
     <div class="sidebar__links">
       ${Object.entries(ROUTES)
@@ -788,47 +793,161 @@ function renderOverviewPage(data) {
   const entries = buildLogEntries(data).slice(0, 4);
   const efficiency = averageEfficiency(reactors);
   const flux = getPrimaryFlux(data);
-  const heroArt = `/assets/reactors/level-${primaryReactor.level || 6}.webp`;
+  const heroArt = `assets/reactors/level-${primaryReactor.level || 6}.webp`;
+  const hasLiveData = data.overview.hasLiveData;
+  const totalReactors = data.overview.totalReactors || SHOWCASE_LEVELS.length;
+  const queuedCommands = activeCommandCount(data.commands);
+  const meStored = getPrimaryStation(data)?.me?.storedPower || 0;
+  const showcaseCards = (
+    sortedReactors.length
+      ? sortedReactors.slice(0, 3).map((reactor) => {
+          const meta = reactorStateMeta(reactor);
+          return `
+            <article class="overview-preview" style="--preview-art:url('assets/reactors/level-${reactor.level}.webp')">
+              <div class="overview-preview__veil"></div>
+              <div class="overview-preview__body">
+                <div>
+                  <span class="${meta.badgeClass}">${meta.label}</span>
+                  <h4>${escapeHtml(reactor.name)}</h4>
+                  <p>${escapeHtml(reactor.stationName)}</p>
+                </div>
+                <div class="overview-preview__meta">
+                  <span>Выход</span>
+                  <strong>${formatRate(reactor.energyGeneration)}</strong>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+      : SHOWCASE_LEVELS.slice(0, 3).map(
+          (level) => `
+            <article class="overview-preview overview-preview--placeholder" style="--preview-art:url('assets/reactors/level-${level}.webp')">
+              <div class="overview-preview__veil"></div>
+              <div class="overview-preview__body">
+                <div>
+                  <span class="badge badge--muted">Standby</span>
+                  <h4>Контур уровня ${level}</h4>
+                  <p>Ждём первую телеметрию</p>
+                </div>
+                <div class="overview-preview__meta">
+                  <span>Режим</span>
+                  <strong>Подготовка</strong>
+                </div>
+              </div>
+            </article>
+          `
+        )
+  ).join("");
 
   const heroContent = `
-    <section class="hero-grid">
-      <article class="hero-card hero-card--metric">
-        <p class="hero-card__eyebrow">Общая энергия</p>
-        <h3 class="hero-card__value">${formatRate(data.overview.totalGeneration)}</h3>
-        <p class="hero-card__subvalue">
-          ${data.overview.hasLiveData ? `Последний пакет ${relativeAgeText(data.overview.latestStationReportAt)}` : "Система ждёт первую телеметрию"}
-        </p>
-        <div class="hero-card__sparkline">
-          ${renderLineChart(heroHistory.length ? heroHistory : [18, 22, 24, 28, 33, 36, 42, 39, 45, 47, 44, 52], { width: 620, height: 210 })}
-        </div>
-        <div class="hero-card__delta-row">
-          <div>
-            <span>Производство</span>
-            <strong>${formatRate(data.overview.totalFluxInput)}</strong>
+    <section class="overview-stage">
+      <article class="overview-banner" style="--hero-art:url('${heroArt}')">
+        <div class="overview-banner__backdrop"></div>
+
+        <div class="overview-banner__content">
+          <p class="overview-banner__eyebrow">Central control</p>
+          <h3 class="overview-banner__title">
+            ${hasLiveData ? "Комплекс на линии и готов к управлению" : "Панель уже готова, осталось дождаться первого пакета"}
+          </h3>
+          <p class="overview-banner__lead">
+            ${
+              hasLiveData
+                ? "Главная страница теперь работает как оперативный мостик: здесь сразу видно генерацию, нагрузку сети, состояние контуров и последние сигналы со станции."
+                : "Даже без телеметрии главный экран больше не пустует: он показывает подготовленный стенд комплекса, контроль синхронизации и витрину реакторов, которые скоро появятся в онлайне."
+            }
+          </p>
+
+          <div class="overview-banner__chips">
+            <span class="${stateToneClass(hasLiveData ? "good" : "warn")}">
+              ${hasLiveData ? "Станция отвечает" : "Ожидание станции"}
+            </span>
+            <span class="badge badge--muted">${data.overview.activeReactors} / ${totalReactors} контуров активны</span>
+            <span class="badge badge--muted">${queuedCommands} команд в очереди</span>
           </div>
-          <div>
-            <span>Выдача</span>
-            <strong>${formatRate(data.overview.totalFluxOutput)}</strong>
+
+          <div class="overview-banner__stats">
+            <div>
+              <span>Буфер Flux</span>
+              <strong>${formatEnergy(data.overview.totalFluxBuffer)}</strong>
+            </div>
+            <div>
+              <span>Низкотемпературный хладагент</span>
+              <strong>${formatFluid(data.overview.lowTempCoolantTotal)}</strong>
+            </div>
+            <div>
+              <span>Средняя эффективность</span>
+              <strong>${efficiency}%</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="overview-banner__meter">
+          <p class="overview-banner__eyebrow">Output pulse</p>
+          <h4 class="overview-banner__metric">${formatRate(data.overview.totalGeneration)}</h4>
+          <p class="overview-banner__meta">
+            ${hasLiveData ? `Последний пакет получен ${relativeAgeText(data.overview.latestStationReportAt)}` : "Ожидаем первую телеметрию от OpenComputers и загрузку живых графиков."}
+          </p>
+          <div class="overview-banner__chart">
+            ${renderLineChart(heroHistory.length ? heroHistory : [18, 22, 24, 28, 33, 36, 42, 39, 45, 47, 44, 52], { width: 560, height: 190 })}
+          </div>
+          <div class="overview-banner__split">
+            <div>
+              <span>Производство</span>
+              <strong>${formatRate(data.overview.totalFluxInput)}</strong>
+            </div>
+            <div>
+              <span>Выдача</span>
+              <strong>${formatRate(data.overview.totalFluxOutput)}</strong>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="hero-card hero-card--visual" style="--hero-art:url('${heroArt}')">
-        <div class="hero-card__visual-copy">
-          <span class="${stateToneClass(data.overview.hasLiveData ? "good" : "warn")}">
-            ${data.overview.hasLiveData ? "Комплекс активен" : "Standby"}
-          </span>
-          <h3>${escapeHtml(primaryReactor.name)}</h3>
-          <p>
-            ${data.overview.hasLiveData ? "Главный контур сейчас формирует визуальный центр панели и служит опорой для быстрой оценки комплекса." : "Пока данных нет, панель показывает подготовленный визуальный стенд и остаётся готовой к подключению."}
-          </p>
-        </div>
-        <div class="hero-card__visual-art"></div>
-      </article>
+      <div class="overview-aside">
+        <article class="overview-side-card">
+          <div class="overview-side-card__head">
+            <div>
+              <p class="panel__eyebrow">Sync pulse</p>
+              <h3>Контроль синхронизации</h3>
+            </div>
+          </div>
+
+          <div class="overview-side-card__stats">
+            <div>
+              <span>Цикл обновления</span>
+              <strong>${data.syncIntervalSeconds || 45}с</strong>
+            </div>
+            <div>
+              <span>Последний пакет</span>
+              <strong>${hasLiveData ? relativeAgeText(data.overview.latestStationReportAt) : "нет данных"}</strong>
+            </div>
+            <div>
+              <span>Энергия в МЭ</span>
+              <strong>${meStored ? formatAe(meStored) : "—"}</strong>
+            </div>
+            <div>
+              <span>Связь с сетью Flux</span>
+              <strong>${flux ? "активна" : "ожидание"}</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="overview-side-card overview-side-card--showcase">
+          <div class="overview-side-card__head">
+            <div>
+              <p class="panel__eyebrow">Showcase</p>
+              <h3>Быстрый обзор контуров</h3>
+            </div>
+          </div>
+          <div class="overview-preview-grid">
+            ${showcaseCards}
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="tile-grid">
-      ${metricTile("reactor", "Активные реакторы", `${data.overview.activeReactors} / ${data.overview.totalReactors || SHOWCASE_LEVELS.length}`, "Сколько контуров сейчас реально в работе.", data.overview.hasLiveData ? "good" : "warn")}
+      ${metricTile("reactor", "Активные реакторы", `${data.overview.activeReactors} / ${totalReactors}`, "Сколько контуров сейчас реально в работе.", data.overview.hasLiveData ? "good" : "warn")}
       ${metricTile("shield", "Средняя эффективность", `${efficiency}%`, "Оценка по охлаждению, температуре и текущей генерации.")}
       ${metricTile("bolt", "Выдача в сеть", formatRate(data.overview.totalFluxOutput), "Текущий поток в Flux.", "accent")}
       ${metricTile("battery", "Буфер Flux", formatEnergy(data.overview.totalFluxBuffer), flux ? `Пиковый буфер: ${formatEnergy(flux.historySummary?.peakBuffer || 0)}` : "История появится после первых пакетов.")}
@@ -919,7 +1038,7 @@ function renderReactorControlCard(reactor, commandMap, allowCommands) {
   const disabled = !allowCommands || reactor.stationIsStale || pending;
 
   return `
-    <article class="${meta.cardClass}" style="--reactor-art:url('/assets/reactors/level-${reactor.level}.webp')">
+    <article class="${meta.cardClass}" style="--reactor-art:url('assets/reactors/level-${reactor.level}.webp')">
       <div class="reactor-card__art"></div>
       <div class="reactor-card__body">
         <div class="reactor-card__head">
@@ -1006,7 +1125,7 @@ function renderReactorsPage(data) {
           <section class="reactor-grid">
             ${SHOWCASE_LEVELS.map(
               (level) => `
-                <article class="reactor-card reactor-card--placeholder" style="--reactor-art:url('/assets/reactors/level-${level}.webp')">
+                <article class="reactor-card reactor-card--placeholder" style="--reactor-art:url('assets/reactors/level-${level}.webp')">
                   <div class="reactor-card__art"></div>
                   <div class="reactor-card__body">
                     <div class="reactor-card__head">
@@ -1189,7 +1308,7 @@ async function handleCommand(button) {
   try {
     setLiveMessage(`Ставлю команду "${action === "start" ? "включить" : "выключить"}" в очередь...`);
 
-    const response = await fetch("/api/reactors/command", {
+    const response = await fetch("api/reactors/command", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1260,7 +1379,7 @@ function updateCountdown() {
 }
 
 async function loadState() {
-  const response = await fetch("/api/state", {
+  const response = await fetch("api/state", {
     cache: "no-store",
   });
 

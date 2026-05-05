@@ -4,7 +4,9 @@
 
 ## Файлы
 
+- [installer.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/installer.lua) — автозагрузчик, который сам скачает пакет на игровой компьютер.
 - [reactor_agent.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/reactor_agent.lua) — основной агент.
+- [reactor_config.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/reactor_config.lua) — отдельный конфиг, который не перезатирается при переустановке.
 - [autorun.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/autorun.lua) — опциональный автозапуск.
 
 ## Что нужно на компьютере
@@ -16,21 +18,31 @@
   - `flux_controller` или `flux_plug`
   - `me_interface`
 
-## Куда копировать
+## Установка в один шаг
 
-1. `reactor_agent.lua` положите в `/home/reactor_agent.lua`
-2. Если нужен автозапуск:
-   `autorun.lua` положите в корень диска как `/autorun.lua`
+На OpenComputers скачайте и запустите установщик:
 
-`autorun.lua` опирается на стандартный механизм OpenOS autorun на корне файловой системы.
+```sh
+wget -f https://raw.githubusercontent.com/VoityVitCod/ReactorsFull/main/opencomputers/server-computer/installer.lua /home/reactor_installer.lua
+lua /home/reactor_installer.lua
+```
+
+Он автоматически скачает:
+
+- `/home/reactor_agent.lua`
+- `/home/reactor_config.lua`
+- `/autorun.lua`
+- `/home/reactor_control_readme.md`
+
+`autorun.lua` использует стандартный механизм OpenOS autorun на корне файловой системы.
 
 ## Что поправить перед запуском
 
-Откройте `/home/reactor_agent.lua` и поменяйте блок `config`:
+Откройте `/home/reactor_config.lua` и поправьте значения:
 
 ```lua
-local config = {
-  serverBaseUrl = "http://127.0.0.1:8080",
+return {
+  serverBaseUrl = "https://your-reactor-site.onrender.com",
   token = "change-me",
   stationId = "reactor-station-1",
   stationName = "Главная реакторная",
@@ -68,6 +80,8 @@ fluxNames = {
 ```sh
 lua /home/reactor_agent.lua
 ```
+
+Если уже есть корректный `/autorun.lua`, после настройки конфига можно просто перезагрузить компьютер.
 
 ## Как работает цикл
 

@@ -14,10 +14,12 @@ const PORT = Number(process.env.PORT || 8080);
 const AGENT_TOKEN = process.env.OC_AGENT_TOKEN || "change-me";
 const DEFAULT_SYNC_INTERVAL_SECONDS = Number(process.env.SYNC_INTERVAL_SECONDS || 45);
 const STALE_AFTER_SECONDS = DEFAULT_SYNC_INTERVAL_SECONDS * 3;
+const FLUX_HISTORY_LIMIT = Number(process.env.FLUX_HISTORY_LIMIT || 24);
 const COMMAND_RESEND_AFTER_MS = Number(process.env.COMMAND_RESEND_AFTER_MS || 120000);
 const COMMAND_EXPIRY_MS = Number(process.env.COMMAND_EXPIRY_MS || 24 * 60 * 60 * 1000);
 const BODY_LIMIT_BYTES = Number(process.env.BODY_LIMIT_BYTES || 2 * 1024 * 1024);
 const MAX_RECENT_COMMANDS = 40;
+const SHOWCASE_LEVELS = [1, 2, 3, 4, 5, 6];
 
 const MIME_TYPES = {
   ".css": "text/css; charset=utf-8",
@@ -129,107 +131,30 @@ function writeJson(filePath, value) {
   fs.renameSync(tempPath, filePath);
 }
 
-function createDemoState() {
-  const timestamp = nowIso();
-  const fuelCaps = [180000, 220000, 260000, 300000, 340000, 380000];
-  const coolantCaps = [128000, 224000, 336000, 448000, 600000, 756000];
-  const fuelLeft = [180000, 196000, 184000, 172000, 141000, 74412];
-  const generation = [0, 324000, 882000, 1640000, 2910000, 5139864];
-  const coolant = [0, 141000, 279500, 371000, 488000, 491948];
-  const consumption = [0, 78, 191, 283, 441, 691];
-  const active = [false, true, true, true, true, true];
-  const fuelEta = [null, 62280, 48720, 36450, 22410, 9855];
-
+function createEmptyState() {
   return {
-    demoMode: true,
-    updatedAt: timestamp,
-    stations: [
-      {
-        stationId: "demo-reactor-complex",
-        stationName: "Демо-комплекс Reactor Grid",
-        lastSeenAt: timestamp,
-        intervalSeconds: DEFAULT_SYNC_INTERVAL_SECONDS,
-        reactors: Array.from({ length: 6 }, (_, index) => {
-          const level = index + 1;
-
-          return {
-            reactorId: `demo-reactor-${level}`,
-            address: `demo-reactor-${level}`,
-            name: `Контур L${level}`,
-            level,
-            active: active[index],
-            activeCooling: level >= 3,
-            energyGeneration: generation[index],
-            temperature: active[index] ? 250 + level * 120 : 0,
-            maxTemperature: 9999,
-            coolant: coolant[index],
-            maxCoolant: coolantCaps[index],
-            coolantPerSecond: consumption[index],
-            fuelRemaining: fuelLeft[index],
-            maxFuel: fuelCaps[index],
-            fuelBurnRatePerSecond: active[index] ? round(fuelLeft[index] / fuelEta[index], 4) : 0,
-            estimatedSecondsRemaining: fuelEta[index],
-            rodCount: level * 3,
-            isDemo: true,
-            updatedAt: timestamp,
-          };
-        }),
-        fluxNetworks: [
-          {
-            networkId: "demo-flux-main",
-            name: "Flux Mainline",
-            type: "controller",
-            storedEnergy: 0,
-            maxStoredEnergy: 2147483647,
-            buffer: 12637,
-            transferLimit: 262144,
-            inputPerTick: 50308962,
-            outputPerTick: 50309076,
-            surgeMode: false,
-            unlimited: true,
-            countInfo: {
-              controllerCount: 1,
-              plugCount: 16,
-              pointCount: 77,
-              storageCount: 0,
-            },
-          },
-        ],
-        me: {
-          address: "demo-me-interface",
-          name: "Главная МЭ",
-          online: true,
-          storedPower: 40638088.87894,
-          maxStoredPower: 40640800,
-          avgPowerInjection: 2740.17,
-          avgPowerUsage: 2762.08,
-          idlePowerUsage: 2711.12,
-          energyDemand: 2712.12,
-          lowTempCoolant: {
-            id: "demo-low-temp-coolant",
-            name: "htc_reactors:low_temperature_coolant",
-            label: "Низкотемпературный хладагент",
-            amount: 18734400,
-          },
-          trackedFluids: [
-            {
-              id: "demo-low-temp-coolant",
-              name: "htc_reactors:low_temperature_coolant",
-              label: "Низкотемпературный хладагент",
-              amount: 18734400,
-            },
-            {
-              id: "demo-distilled-water",
-              name: "ic2:distilled_water",
-              label: "Дистиллированная вода",
-              amount: 6280000,
-            },
-          ],
-          cooldowns: {},
-        },
-      },
-    ],
+    placeholderMode: true,
+    updatedAt: nowIso(),
+    stations: [],
   };
+}
+
+function sanitizePersistedStations(stations) {
+  if (!Array.isArray(stations)) {
+    return [];
+  }
+
+  return stations.filter((station) => {
+    if (!station || typeof station !== "object") {
+      return false;
+    }
+
+    if (!Array.isArray(station.reactors)) {
+      return true;
+    }
+
+    return !station.reactors.every((reactor) => reactor && reactor.isDemo);
+  });
 }
 
 function loadStore() {
@@ -237,17 +162,15 @@ function loadStore() {
 
   const persistedState = readJson(STATE_FILE, null);
   const persistedCommands = readJson(COMMANDS_FILE, null);
-  const demoState = createDemoState();
+  const emptyState = createEmptyState();
+  const stations = sanitizePersistedStations(persistedState?.stations);
 
   return {
-    demoMode:
+    placeholderMode:
       persistedState && Array.isArray(persistedState.stations)
-        ? Boolean(persistedState.demoMode)
-        : demoState.demoMode,
-    stations:
-      persistedState && Array.isArray(persistedState.stations)
-        ? persistedState.stations
-        : demoState.stations,
+        ? Boolean(persistedState.placeholderMode) || !stations.length
+        : emptyState.placeholderMode,
+    stations: stations.length ? stations : emptyState.stations,
     commands: persistedCommands && Array.isArray(persistedCommands.commands) ? persistedCommands.commands : [],
   };
 }
@@ -256,7 +179,7 @@ const store = loadStore();
 
 function persistState() {
   writeJson(STATE_FILE, {
-    demoMode: store.demoMode,
+    placeholderMode: store.placeholderMode,
     updatedAt: nowIso(),
     stations: store.stations,
   });
@@ -377,6 +300,64 @@ function normalizeFluxNetwork(rawFlux, index) {
   };
 }
 
+function normalizeFluxHistoryPoint(rawPoint) {
+  return {
+    at: safeText(rawPoint.at || rawPoint.timestamp || rawPoint.time || nowIso()),
+    buffer: Math.max(0, toNumber(rawPoint.buffer, 0)),
+    storedEnergy: Math.max(0, toNumber(rawPoint.storedEnergy, 0)),
+    inputPerTick: Math.max(0, toNumber(rawPoint.inputPerTick, 0)),
+    outputPerTick: Math.max(0, toNumber(rawPoint.outputPerTick, 0)),
+  };
+}
+
+function summarizeFluxHistory(history) {
+  if (!history.length) {
+    return {
+      averageBuffer: 0,
+      peakBuffer: 0,
+      averageInputPerTick: 0,
+      averageOutputPerTick: 0,
+    };
+  }
+
+  return {
+    averageBuffer: round(sum(history.map((point) => point.buffer)) / history.length, 2),
+    peakBuffer: Math.max(...history.map((point) => point.buffer)),
+    averageInputPerTick: round(sum(history.map((point) => point.inputPerTick)) / history.length, 2),
+    averageOutputPerTick: round(sum(history.map((point) => point.outputPerTick)) / history.length, 2),
+  };
+}
+
+function attachFluxHistory(previousStation, fluxNetworks, reportTimeIso) {
+  const previousNetworks = new Map(
+    (previousStation?.fluxNetworks || []).map((network) => [
+      network.networkId,
+      Array.isArray(network.history) ? network.history.map(normalizeFluxHistoryPoint) : [],
+    ])
+  );
+
+  return fluxNetworks.map((network) => {
+    const historyPoint = normalizeFluxHistoryPoint({
+      at: reportTimeIso,
+      buffer: network.buffer,
+      storedEnergy: network.storedEnergy,
+      inputPerTick: network.inputPerTick,
+      outputPerTick: network.outputPerTick,
+    });
+
+    const history = [...(previousNetworks.get(network.networkId) || [])]
+      .filter((point) => point.at !== reportTimeIso)
+      .concat(historyPoint)
+      .slice(-FLUX_HISTORY_LIMIT);
+
+    return {
+      ...network,
+      history,
+      historySummary: summarizeFluxHistory(history),
+    };
+  });
+}
+
 function deriveFuelBurnRate(rawReactor, previousReactor, reportTimeIso, active) {
   const explicitRate = Math.max(0, toNumber(rawReactor.fuelBurnRatePerSecond, 0));
 
@@ -478,9 +459,10 @@ function normalizeStation(rawReport) {
         .sort((left, right) => left.level - right.level || left.name.localeCompare(right.name, "ru"))
     : [];
 
-  const fluxNetworks = Array.isArray(rawReport.fluxNetworks || rawReport.flux)
+  const baseFluxNetworks = Array.isArray(rawReport.fluxNetworks || rawReport.flux)
     ? (rawReport.fluxNetworks || rawReport.flux).map(normalizeFluxNetwork)
     : [];
+  const fluxNetworks = attachFluxHistory(previousStation, baseFluxNetworks, reportTimeIso);
 
   return {
     stationId,
@@ -496,6 +478,7 @@ function normalizeStation(rawReport) {
 function stationSummary(station) {
   const activeReactors = station.reactors.filter((reactor) => reactor.active).length;
   const totalGeneration = sum(station.reactors.map((reactor) => reactor.energyGeneration));
+  const totalFluxBuffer = sum(station.fluxNetworks.map((network) => network.buffer));
   const minRemainingSeconds = minPositive(
     station.reactors.map((reactor) => reactor.estimatedSecondsRemaining)
   );
@@ -504,6 +487,7 @@ function stationSummary(station) {
     reactorCount: station.reactors.length,
     activeReactors,
     totalGeneration,
+    totalFluxBuffer,
     minRemainingSeconds,
     lowTempCoolantAmount: station.me?.lowTempCoolant?.amount || 0,
   };
@@ -657,13 +641,24 @@ function getPublicState() {
   const lowTempCoolantTotal = sum(
     stations.map((station) => station.summary.lowTempCoolantAmount)
   );
+  const latestStationReportAt = stations
+    .map((station) => station.lastSeenAt)
+    .sort((left, right) => new Date(right).getTime() - new Date(left).getTime())[0] || null;
+  const latestPacketAgeSeconds = latestStationReportAt
+    ? Math.max(0, Math.floor((Date.now() - new Date(latestStationReportAt).getTime()) / 1000))
+    : null;
+  const hasLiveData = stations.length > 0;
 
   return {
     generatedAt: nowIso(),
-    demoMode: store.demoMode,
+    placeholderMode: !hasLiveData,
     syncIntervalSeconds: DEFAULT_SYNC_INTERVAL_SECONDS,
     staleAfterSeconds: STALE_AFTER_SECONDS,
+    placeholder: {
+      showcaseLevels: SHOWCASE_LEVELS,
+    },
     overview: {
+      hasLiveData,
       totalStations: stations.length,
       staleStations: stations.filter((station) => station.isStale).length,
       totalReactors,
@@ -673,6 +668,8 @@ function getPublicState() {
       totalFluxInput,
       totalFluxOutput,
       lowTempCoolantTotal,
+      latestStationReportAt,
+      latestPacketAgeSeconds,
     },
     stations,
     commands,
@@ -767,7 +764,7 @@ async function handleApi(req, res, requestUrl) {
     sendJson(res, 200, {
       ok: true,
       time: nowIso(),
-      demoMode: store.demoMode,
+      placeholderMode: store.placeholderMode,
       stationCount: store.stations.length,
     });
     return true;
@@ -815,10 +812,6 @@ async function handleApi(req, res, requestUrl) {
       const station = normalizeStation(report);
       applyCommandResults(station.stationId, report.commandResults);
 
-      if (store.demoMode) {
-        store.stations = [];
-      }
-
       const existingIndex = store.stations.findIndex(
         (currentStation) => currentStation.stationId === station.stationId
       );
@@ -829,7 +822,7 @@ async function handleApi(req, res, requestUrl) {
         store.stations.push(station);
       }
 
-      store.demoMode = false;
+      store.placeholderMode = store.stations.length === 0;
       persistState();
 
       sendJson(res, 200, {
@@ -859,9 +852,9 @@ async function handleApi(req, res, requestUrl) {
         return true;
       }
 
-      if (store.demoMode) {
+      if (store.placeholderMode || store.stations.length === 0) {
         sendJson(res, 409, {
-          error: "Сейчас включён демо-режим. Дождитесь первого отчёта от OpenComputers, и команды разблокируются.",
+          error: "Команды разблокируются после первого живого отчёта от OpenComputers.",
         });
         return true;
       }
@@ -925,5 +918,5 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, HOST, () => {
   console.log(`[reactor-dashboard] http://${HOST}:${PORT}`);
   console.log(`[reactor-dashboard] sync interval: ${DEFAULT_SYNC_INTERVAL_SECONDS}s`);
-  console.log(`[reactor-dashboard] demo mode: ${store.demoMode ? "on" : "off"}`);
+  console.log(`[reactor-dashboard] placeholder mode: ${store.placeholderMode ? "on" : "off"}`);
 });

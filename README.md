@@ -8,10 +8,13 @@
 ## Что уже умеет
 
 - Показывать карточки реакторов с фоном по уровню `1-6`.
+- Показывать красивую заглушку, если OpenComputers ещё не прислал первый отчёт.
 - Отображать генерацию, охлаждение, расход жижи, температуру, остаток топлива и примерное время до выработки.
 - Показать состояние `Flux` сети: буфер, лимит передачи, вход и выход.
+- Строить историю `Flux` по времени в виде столбиков последних пакетов.
 - Показать состояние `МЭ` сети: энергия и количество **низкотемпературного хладагента**.
 - Ставить в очередь команды `включить` / `выключить`, которые OpenComputers-агент забирает на своём 45-секундном цикле.
+- Устанавливать OpenComputers-пакет через один автозагрузчик.
 - Работать без `npm install`: нужен только `node`.
 
 ## Структура
@@ -20,7 +23,9 @@
 - [public/index.html](/Users/artyom/Documents/Реакторы/public/index.html)
 - [public/styles.css](/Users/artyom/Documents/Реакторы/public/styles.css)
 - [public/app.js](/Users/artyom/Documents/Реакторы/public/app.js)
+- [opencomputers/server-computer/installer.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/installer.lua)
 - [opencomputers/server-computer/reactor_agent.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/reactor_agent.lua)
+- [opencomputers/server-computer/reactor_config.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/reactor_config.lua)
 - [opencomputers/server-computer/autorun.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/autorun.lua)
 - [opencomputers/server-computer/README.md](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/README.md)
 
@@ -54,10 +59,15 @@ node /Users/artyom/Documents/Реакторы/server.js
 
 Быстрый сценарий:
 
-1. Откройте [opencomputers/server-computer/reactor_agent.lua](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/reactor_agent.lua) и поправьте блок `config`.
-2. Перенесите `reactor_agent.lua` на диск OpenComputers в `/home/reactor_agent.lua`.
-3. Если нужен автозапуск, перенесите `autorun.lua` в корень диска `/autorun.lua`.
-4. Запустите агент вручную командой `lua /home/reactor_agent.lua` или перезагрузите компьютер с `autorun.lua`.
+1. На OpenComputers скачайте и запустите установщик:
+
+```sh
+wget -f https://raw.githubusercontent.com/VoityVitCod/ReactorsFull/main/opencomputers/server-computer/installer.lua /home/reactor_installer.lua
+lua /home/reactor_installer.lua
+```
+
+2. Отредактируйте `/home/reactor_config.lua`.
+3. Запустите агент вручную `lua /home/reactor_agent.lua` или просто перезагрузите компьютер, если нужен автозапуск через `/autorun.lua`.
 
 Подробности лежат в [opencomputers/server-computer/README.md](/Users/artyom/Documents/Реакторы/opencomputers/server-computer/README.md).
 
@@ -76,4 +86,4 @@ node /Users/artyom/Documents/Реакторы/server.js
 - `data/state-store.json`
 - `data/commands-store.json`
 
-Если реальных отчётов ещё не было, сайт покажет демо-панель с реакторами `1-6`, чтобы интерфейс можно было сразу проверить визуально.
+Если реальных отчётов ещё не было, сайт покажет визуальную заглушку с карточками реакторов `1-6` и подсказками по запуску.

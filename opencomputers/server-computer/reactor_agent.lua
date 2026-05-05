@@ -3,7 +3,7 @@ local computer = require("computer")
 local os = require("os")
 local unicode = require("unicode")
 
-local config = {
+local defaultConfig = {
   serverBaseUrl = "http://127.0.0.1:8080",
   token = "change-me",
   stationId = "reactor-station-1",
@@ -24,6 +24,52 @@ local config = {
   },
   meName = "Главная МЭ",
 }
+
+local function cloneTable(value)
+  if type(value) ~= "table" then
+    return value
+  end
+
+  local copy = {}
+  for key, nestedValue in pairs(value) do
+    copy[key] = cloneTable(nestedValue)
+  end
+  return copy
+end
+
+local function mergeConfig(base, overrides)
+  local merged = cloneTable(base)
+
+  if type(overrides) ~= "table" then
+    return merged
+  end
+
+  for key, value in pairs(overrides) do
+    if type(value) == "table" and type(merged[key]) == "table" then
+      merged[key] = mergeConfig(merged[key], value)
+    else
+      merged[key] = value
+    end
+  end
+
+  return merged
+end
+
+local function loadExternalConfig()
+  local ok, loadedOrError = pcall(dofile, "/home/reactor_config.lua")
+
+  if not ok then
+    return cloneTable(defaultConfig), loadedOrError
+  end
+
+  if type(loadedOrError) ~= "table" then
+    return cloneTable(defaultConfig), "reactor_config.lua должен возвращать таблицу"
+  end
+
+  return mergeConfig(defaultConfig, loadedOrError), nil
+end
+
+local config, configLoadError = loadExternalConfig()
 
 local function trimAddress(address)
   local value = tostring(address or "")
@@ -622,4 +668,7 @@ end
 
 log("station id:", config.stationId)
 log("server:", config.serverBaseUrl)
+if configLoadError then
+  log("config warning:", configLoadError)
+end
 mainLoop()

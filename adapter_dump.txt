@@ -1,0 +1,1351 @@
+OPENCOMPUTERS ADAPTER DUMP
+Uptime: 1521 sec
+
+================================================
+ID: fb3fc384-e648-4b54-94a7-a94623786b33
+TYPE: disk_drive
+
+METHOD: isEmpty
+DOC: function():boolean -- Checks whether some medium is currently in the drive.
+RESULT: false
+
+METHOD: media
+DOC: function(): string -- Return the internal floppy disk address
+RESULT: skipped
+
+METHOD: eject
+DOC: function([velocity:number]):boolean -- Eject the currently present medium from the drive.
+RESULT: skipped
+
+
+================================================
+ID: eb6d8b8b-e1ba-4624-85e3-580f264031fc
+TYPE: screen
+
+METHOD: isPrecise
+DOC: function():boolean -- Returns whether the screen is in high precision mode (sub-pixel mouse event positions).
+RESULT: false
+
+METHOD: isTouchModeInverted
+DOC: function():boolean -- Whether touch mode is inverted (sneak-activate opens GUI, instead of normal activate).
+RESULT: false
+
+METHOD: setTouchModeInverted
+DOC: function(value:boolean):boolean -- Sets whether to invert touch mode (sneak-activate opens GUI, instead of normal activate).
+RESULT: skipped
+
+METHOD: isOn
+DOC: function():boolean -- Returns whether the screen is currently on.
+RESULT: true
+
+METHOD: getAspectRatio
+DOC: function():number, number -- The aspect ratio of the screen. For multi-block screens this is the number of blocks, horizontal and vertical.
+RESULT: 1.0, 1.0
+
+METHOD: setPrecise
+DOC: function(enabled:boolean):boolean -- Set whether to use high precision mode (sub-pixel mouse event positions).
+RESULT: skipped
+
+METHOD: turnOff
+DOC: function():boolean -- Turns off the screen. Returns whether the state changed, and whether it is now on.
+RESULT: skipped
+
+METHOD: turnOn
+DOC: function():boolean -- Turns the screen on. Returns whether the state changed, and whether it is now on.
+RESULT: skipped
+
+METHOD: getKeyboards
+DOC: function():table -- The list of keyboards attached to the screen.
+RESULT: { 1=ab840616-0267-47d9-89ce-9e76e30d09e4 }
+
+
+================================================
+ID: 05a84dda-722f-424d-b840-9f13339bf0cc
+TYPE: screen
+
+METHOD: isPrecise
+DOC: function():boolean -- Returns whether the screen is in high precision mode (sub-pixel mouse event positions).
+RESULT: false
+
+METHOD: isTouchModeInverted
+DOC: function():boolean -- Whether touch mode is inverted (sneak-activate opens GUI, instead of normal activate).
+RESULT: false
+
+METHOD: setTouchModeInverted
+DOC: function(value:boolean):boolean -- Sets whether to invert touch mode (sneak-activate opens GUI, instead of normal activate).
+RESULT: skipped
+
+METHOD: isOn
+DOC: function():boolean -- Returns whether the screen is currently on.
+RESULT: true
+
+METHOD: getAspectRatio
+DOC: function():number, number -- The aspect ratio of the screen. For multi-block screens this is the number of blocks, horizontal and vertical.
+RESULT: 6.0, 5.0
+
+METHOD: setPrecise
+DOC: function(enabled:boolean):boolean -- Set whether to use high precision mode (sub-pixel mouse event positions).
+RESULT: skipped
+
+METHOD: turnOff
+DOC: function():boolean -- Turns off the screen. Returns whether the state changed, and whether it is now on.
+RESULT: skipped
+
+METHOD: turnOn
+DOC: function():boolean -- Turns the screen on. Returns whether the state changed, and whether it is now on.
+RESULT: skipped
+
+METHOD: getKeyboards
+DOC: function():table -- The list of keyboards attached to the screen.
+RESULT: {  }
+
+
+================================================
+ID: c1e5761f-ca42-4a78-8c1f-e482aa736378
+TYPE: flux_plug
+
+METHOD: canExtract
+DOC: function():number -- Returns whether this component can have energy extracted from the connected side.
+RESULT: skipped
+
+METHOD: getEnergyStored
+DOC: function():number -- Returns the amount of stored energy on the connected side.
+RESULT: 0
+
+METHOD: getNetworkInfo
+DOC: <no doc>
+RESULT: { ownerUUID=05a939e5-a1c4-3e9d-a189-1c9046f713bc, securityType=encrypted, id=1, energyType=RF, averageTick=225, name=ArtemTverdokhleb's Netwo }
+
+METHOD: getMaxEnergyStored
+DOC: function():number -- Returns the maximum amount of stored energy on the connected side.
+RESULT: 2147483647
+
+METHOD: getCountInfo
+DOC: <no doc>
+RESULT: { storageCount=0, pointCount=77, plugCount=16, controllerCount=1 }
+
+METHOD: getEnergyInfo
+DOC: <no doc>
+RESULT: { energyInput=49741354, totalBuffer=12431, totalEnergy=0, energyOutput=49741478 }
+
+METHOD: getFluxInfo
+DOC: <no doc>
+RESULT: { transferLimit=262144, buffer=0, priority=0, surgeMode=true, unlimited=true, customName=Flux Plug }
+
+METHOD: canReceive
+DOC: function():number -- Returns whether this component can receive energy on the connected side.
+RESULT: skipped
+
+
+================================================
+ID: dbc7703c-c4bf-4e9c-a6ec-3959abc06321
+TYPE: htc_reactors_nuclear_reactor
+
+METHOD: getFluidCoolant
+DOC: function():int -- Получает текущий объём внутреннего буфера охлаждения.
+RESULT: 491948
+
+METHOD: getReactorLevel
+DOC: function():int -- Уровень реактора.
+RESULT: 6
+
+METHOD: getEnergyGeneration
+DOC: function():long -- Получает текущую генерацию энергии.
+RESULT: 5139864
+
+METHOD: deactivate
+DOC: function():boolean -- Выключает реактор.
+RESULT: skipped
+
+METHOD: getReactorComponents
+DOC: function():table -- Получает информацию о всех компонентах схемы реактора.
+RESULT: { 1={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 2={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 3={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 4={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 5={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 6={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 7={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 8={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 9={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 10={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 11={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 12={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 13={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 14={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 15={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 16={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 17={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 18={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 19={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 20={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 21={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 22={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 23={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 24={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 25={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 26={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 27={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 28={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 29={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 30={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 31={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 32={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 33={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 34={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 35={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 36={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 37={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 38={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 39={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 40={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 42={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 43={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 44={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 45={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 46={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 47={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 48={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 49={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 50={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 51={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 52={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 53={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 54={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 55={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 56={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 57={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 58={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 59={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 60={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 61={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 62={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 63={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 64={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 65={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 66={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 67={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 68={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 69={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 70={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 71={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 72={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 73={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 74={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 75={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 76={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 77={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 78={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 79={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 80={ 1=item, 2=htc_reactors:beryllium_adv_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 81={ 1=item, 2=htc_reactors:beryllium_component_heat_vent, 3=count, 4=6, 5=meta, 6=0 } }
+
+METHOD: getSelectStatusRod
+DOC: function(slot:int):table -- Получает информацию о топливном стержне в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: activate
+DOC: function():boolean -- Включает реактор.
+RESULT: skipped
+
+METHOD: getTemperature
+DOC: function():int -- Получает текущую температуру реактора.
+RESULT: 9998
+
+METHOD: isFuelFilterActive
+DOC: function():boolean -- Проверяет, активен ли топливный фильтр.
+RESULT: true
+
+METHOD: setActiveCooling
+DOC: function(state:boolean):boolean -- Включает или выключает жидкостное охлаждение.
+RESULT: skipped
+
+METHOD: getReactorComponent
+DOC: function(slot:int):table -- Получает информацию о компоненте схемы в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getCoolantItem
+DOC: function(slot:int):table -- Получает информацию о предмете охлаждения в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getMaxFluidCoolant
+DOC: function():int -- Получает максимальный объём внутреннего буфера охлаждения.
+RESULT: 540000
+
+METHOD: getMaxTemperature
+DOC: function():int -- Получает максимальную температуру реактора.
+RESULT: 9999
+
+METHOD: getAllFuelRodsStatus
+DOC: function():table -- Получает информацию о всех топливных стержнях.
+RESULT: { 1={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=28, 7=maxFuel, 8=10000 }, 2={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=30, 7=maxFuel, 8=10000 }, 3={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=32, 7=maxFuel, 8=10000 }, 6={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=36, 7=maxFuel, 8=10000 }, 8={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=38, 7=maxFuel, 8=10000 }, 9={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=40, 7=maxFuel, 8=10000 }, 11={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=42, 7=maxFuel, 8=10000 }, 12={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=44, 7=maxFuel, 8=10000 }, 14={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=46, 7=maxFuel, 8=10000 }, 16={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=48, 7=maxFuel, 8=10000 }, 24={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=58, 7=maxFuel, 8=10000 }, 17={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=50, 7=maxFuel, 8=10000 }, 19={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=52, 7=maxFuel, 8=10000 }, 20={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=54, 7=maxFuel, 8=10000 }, 22={ 1=item, 2=htc_reactors:sixteen_mox_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=56, 7=maxFuel, 8=10000 } }
+
+METHOD: getFluidCoolantConsume
+DOC: function():int -- Получает потребление охлаждающей жидкости в секунду.
+RESULT: 480
+
+METHOD: isActiveCooling
+DOC: function():boolean -- Проверяет, активно ли жидкостное охлаждение.
+RESULT: true
+
+METHOD: hasWork
+DOC: function():boolean -- Проверяет, работает ли реактор.
+RESULT: true
+
+
+================================================
+ID: ab840616-0267-47d9-89ce-9e76e30d09e4
+TYPE: keyboard
+
+
+================================================
+ID: 8b34ba1b-6a61-4010-a468-341cf1fa55b4
+TYPE: me_interface
+
+METHOD: getCraftables
+DOC: function([filter:table]):table -- Get a list of known item recipes. These can be used to issue crafting requests.
+RESULT: false, cooldown, 23s
+
+METHOD: getAvgPowerInjection
+DOC: function():number -- Get the average power injection into the network.
+RESULT: 2740.1658475845
+
+METHOD: isNetworkPowered
+DOC: function():boolean -- True if the AE network is considered online
+RESULT: true
+
+METHOD: store
+DOC: function([filter:table, dbAddress:string, startSlot:number, count:number]): bool -- Store items in the network matching the specified filter in the database with the specified address.
+RESULT: skipped
+
+METHOD: getFluidsInNetwork
+DOC: function():table -- Get a list of the stored fluids in the network.
+RESULT: false, cooldown, 22s
+
+METHOD: getStoredPower
+DOC: function():number -- Get the stored power in the network. 
+RESULT: 40638088.87894
+
+METHOD: getInterfaceConfiguration
+DOC: function([slot:number]):table -- Get the configuration of the interface.
+RESULT: nil
+
+METHOD: getMaxStoredPower
+DOC: function():number -- Get the maximum stored power in the network.
+RESULT: 40640800.0
+
+METHOD: getCpus
+DOC: function():table -- Get a list of tables representing the available CPUs in the network.
+RESULT: { 1={ busy=false, coprocessors=49152, name=, storage=1623195648 } }
+
+METHOD: getEnergyDemand
+DOC: function():number -- Returns the energy demand on the AE network
+RESULT: 2712.1210602745
+
+METHOD: getIdlePowerUsage
+DOC: function():number -- Get the idle power usage of the network.
+RESULT: 2711.1170602712
+
+METHOD: setInterfaceConfiguration
+DOC: function([slot:number][, database:address, entry:number[, size:number]]):boolean -- Configure the interface.
+RESULT: skipped
+
+METHOD: getItemsInNetwork
+DOC: function([filter:table]):table -- Get a list of the stored items in the network.
+RESULT: false, cooldown, 22s
+
+METHOD: getAvgPowerUsage
+DOC: function():number -- Get the average power usage of the network.
+RESULT: 2762.0848863223
+
+
+================================================
+ID: 8a9700ad-65cd-41c6-9180-df2a12e9dec8
+TYPE: eeprom
+
+METHOD: getDataSize
+DOC: function():number -- Get the storage capacity of this EEPROM.
+RESULT: 256
+
+METHOD: getData
+DOC: function():string -- Get the currently stored byte array.
+RESULT: b8bec44e-44fa-401d-81da-7181f3798583
+
+METHOD: set
+DOC: function(data:string) -- Overwrite the currently stored byte array.
+RESULT: skipped
+
+METHOD: makeReadonly
+DOC: function(checksum:string):boolean -- Make this EEPROM readonly if it isn't already. This process cannot be reversed!
+RESULT: skipped
+
+METHOD: getChecksum
+DOC: function():string -- Get the checksum of the data on this EEPROM.
+RESULT: 0674306c
+
+METHOD: getSize
+DOC: function():number -- Get the storage capacity of this EEPROM.
+RESULT: 4096
+
+METHOD: get
+DOC: function():string -- Get the currently stored byte array.
+RESULT: local init
+do
+  local component_invoke = component.invoke
+  local function boot_invoke(address, method, ...)
+    local result = table.pack(pcall(component_invoke, address, method, ...))
+    if not result[1] then
+      return nil, result[2]
+    else
+      return table.unpack(result, 2, result.n)
+    end
+  end
+
+  -- backwards compatibility, may remove later
+  local eeprom = component.list("eeprom")()
+  computer.getBootAddress = function()
+    return boot_invoke(eeprom, "getData")
+  end
+  computer.setBootAddress = function(address)
+    return boot_invoke(eeprom, "setData", address)
+  end
+
+  do
+    local screen = component.list("screen")()
+    local gpu = component.list("gpu")()
+    if gpu and screen then
+      boot_invoke(gpu, "bind", screen)
+    end
+  end
+  local function tryLoadFrom(address)
+    local handle, reason = boot_invoke(address, "open", "/init.lua")
+    if not handle then
+      return nil, reason
+    end
+    local buffer = ""
+    repeat
+      local data, reason = boot_invoke(address, "read", handle, math.maxinteger or math.huge)
+      if not data and reason then
+        return nil, reason
+      end
+      buffer = buffer .. (data or "")
+    until not data
+    boot_invoke(address, "close", handle)
+    return load(buffer, "=init")
+  end
+  local reason
+  if computer.getBootAddress() then
+    init, reason = tryLoadFrom(computer.getBootAddress())
+  end
+  if not init then
+    computer.setBootAddress()
+    for address in component.list("filesystem") do
+      init, reason = tryLoadFrom(address)
+      if init then
+        computer.setBootAddress(address)
+        break
+      end
+    end
+  end
+  if not init then
+    error("no bootable medium found" .. (reason and (": " .. tostring(reason)) or ""), 0)
+  end
+  computer.beep(1000, 0.2)
+end
+return init()
+
+
+METHOD: setData
+DOC: function(data:string) -- Overwrite the currently stored byte array.
+RESULT: skipped
+
+METHOD: getLabel
+DOC: function():string -- Get the label of the EEPROM.
+RESULT: EEPROM (Lua BIOS)
+
+METHOD: setLabel
+DOC: function(data:string):string -- Set the label of the EEPROM.
+RESULT: skipped
+
+
+================================================
+ID: 717ab5a5-f79e-4635-8eb7-c724fe753e57
+TYPE: htc_reactors_nuclear_reactor
+
+METHOD: getFluidCoolant
+DOC: function():int -- Получает текущий объём внутреннего буфера охлаждения.
+RESULT: 0
+
+METHOD: getReactorLevel
+DOC: function():int -- Уровень реактора.
+RESULT: 6
+
+METHOD: getEnergyGeneration
+DOC: function():long -- Получает текущую генерацию энергии.
+RESULT: 651840
+
+METHOD: deactivate
+DOC: function():boolean -- Выключает реактор.
+RESULT: skipped
+
+METHOD: getReactorComponents
+DOC: function():table -- Получает информацию о всех компонентах схемы реактора.
+RESULT: { 1={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 2={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 3={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 4={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 5={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 6={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 7={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 8={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 9={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 10={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 11={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 12={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 13={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 14={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 15={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 16={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 17={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 18={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 19={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 20={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 21={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 22={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 23={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 24={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 25={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 26={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 27={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 28={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 29={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 30={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 31={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 32={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 33={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 34={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 35={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 36={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 37={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 38={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 39={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 40={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 42={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 43={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 44={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 45={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 46={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 47={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 48={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 49={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 50={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 51={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 52={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 53={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 54={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 55={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 56={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 57={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 58={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 59={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 60={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 61={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 62={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 63={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 64={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 65={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 66={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 67={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 68={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 69={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 70={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 71={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 72={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 73={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 74={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 75={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 76={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 77={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 78={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 79={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 80={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 81={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 } }
+
+METHOD: getSelectStatusRod
+DOC: function(slot:int):table -- Получает информацию о топливном стержне в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: activate
+DOC: function():boolean -- Включает реактор.
+RESULT: skipped
+
+METHOD: getTemperature
+DOC: function():int -- Получает текущую температуру реактора.
+RESULT: 0
+
+METHOD: isFuelFilterActive
+DOC: function():boolean -- Проверяет, активен ли топливный фильтр.
+RESULT: false
+
+METHOD: setActiveCooling
+DOC: function(state:boolean):boolean -- Включает или выключает жидкостное охлаждение.
+RESULT: skipped
+
+METHOD: getReactorComponent
+DOC: function(slot:int):table -- Получает информацию о компоненте схемы в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getCoolantItem
+DOC: function(slot:int):table -- Получает информацию о предмете охлаждения в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getMaxFluidCoolant
+DOC: function():int -- Получает максимальный объём внутреннего буфера охлаждения.
+RESULT: 756000
+
+METHOD: getMaxTemperature
+DOC: function():int -- Получает максимальную температуру реактора.
+RESULT: 0
+
+METHOD: getAllFuelRodsStatus
+DOC: function():table -- Получает информацию о всех топливных стержнях.
+RESULT: { 1={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 2={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 3={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 4={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 5={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 7={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 8={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 10={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 12={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 13={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 15={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 24={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 17={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 18={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 20={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 21={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 22={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 }, 23={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7744, 7=maxFuel, 8=20000 } }
+
+METHOD: getFluidCoolantConsume
+DOC: function():int -- Получает потребление охлаждающей жидкости в секунду.
+RESULT: 691
+
+METHOD: isActiveCooling
+DOC: function():boolean -- Проверяет, активно ли жидкостное охлаждение.
+RESULT: false
+
+METHOD: hasWork
+DOC: function():boolean -- Проверяет, работает ли реактор.
+RESULT: true
+
+
+================================================
+ID: 99e47764-0b2e-4e0f-aee8-c98663d0ee49
+TYPE: flux_plug
+
+METHOD: canExtract
+DOC: function():number -- Returns whether this component can have energy extracted from the connected side.
+RESULT: skipped
+
+METHOD: getEnergyStored
+DOC: function():number -- Returns the amount of stored energy on the connected side.
+RESULT: 0
+
+METHOD: getNetworkInfo
+DOC: <no doc>
+RESULT: { ownerUUID=05a939e5-a1c4-3e9d-a189-1c9046f713bc, securityType=encrypted, id=1, energyType=RF, averageTick=219, name=ArtemTverdokhleb's Netwo }
+
+METHOD: getMaxEnergyStored
+DOC: function():number -- Returns the maximum amount of stored energy on the connected side.
+RESULT: 2147483647
+
+METHOD: getCountInfo
+DOC: <no doc>
+RESULT: { storageCount=0, pointCount=77, plugCount=16, controllerCount=1 }
+
+METHOD: getEnergyInfo
+DOC: <no doc>
+RESULT: { energyInput=50080126, totalBuffer=13137, totalEnergy=0, energyOutput=50079273 }
+
+METHOD: getFluxInfo
+DOC: <no doc>
+RESULT: { transferLimit=262144, buffer=0, priority=0, surgeMode=true, unlimited=true, customName=Flux Plug }
+
+METHOD: canReceive
+DOC: function():number -- Returns whether this component can receive energy on the connected side.
+RESULT: skipped
+
+
+================================================
+ID: 250187b3-f080-4734-a310-8b89a6adc164
+TYPE: gpu
+
+METHOD: setViewport
+DOC: function(width:number, height:number):boolean -- Set the viewport resolution. Cannot exceed the screen resolution. Returns true if the resolution changed.
+RESULT: skipped
+
+METHOD: maxResolution
+DOC: function():number, number -- Get the maximum screen resolution.
+RESULT: skipped
+
+METHOD: setDepth
+DOC: function(depth:number):number -- Set the color depth. Returns the previous value.
+RESULT: skipped
+
+METHOD: buffers
+DOC: function(): number -- Returns an array of indexes of the allocated buffers
+RESULT: skipped
+
+METHOD: getResolution
+DOC: function():number, number -- Get the current screen resolution.
+RESULT: 160, 50
+
+METHOD: getActiveBuffer
+DOC: function(): number -- returns the index of the currently selected buffer. 0 is reserved for the screen. Can return 0 even when there is no screen
+RESULT: 0
+
+METHOD: fill
+DOC: function(x:number, y:number, width:number, height:number, char:string):boolean -- Fills a portion of the screen at the specified position with the specified size with the specified character.
+RESULT: skipped
+
+METHOD: allocateBuffer
+DOC: function([width: number, height: number]): number -- allocates a new buffer with dimensions width*height (defaults to max resolution) and appends it to the buffer list. Returns the index of the new buffer and returns nil with an error message on failure. A buffer can be allocated even when there is no screen bound to this gpu. Index 0 is always reserved for the screen and thus the lowest index of an allocated buffer is always 1.
+RESULT: skipped
+
+METHOD: setPaletteColor
+DOC: function(index:number, color:number):number -- Set the palette color at the specified palette index. Returns the previous value.
+RESULT: skipped
+
+METHOD: setActiveBuffer
+DOC: function(index: number): number -- Sets the active buffer to `index`. 1 is the first vram buffer and 0 is reserved for the screen. returns nil for invalid index (0 is always valid)
+RESULT: skipped
+
+METHOD: get
+DOC: function(x:number, y:number):string, number, number, number or nil, number or nil -- Get the value displayed on the screen at the specified index, as well as the foreground and background color. If the foreground or background is from the palette, returns the palette indices as fourth and fifth results, else nil, respectively.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getBufferSize
+DOC: function(index: number): number, number -- returns the buffer size at index. Returns the screen resolution for index 0. returns nil for invalid indexes
+RESULT: 160, 50
+
+METHOD: setBackground
+DOC: function(value:number[, palette:boolean]):number, number or nil -- Sets the background color to the specified value. Optionally takes an explicit palette index. Returns the old value and if it was from the palette its palette index.
+RESULT: skipped
+
+METHOD: getDepth
+DOC: function():number -- Returns the currently set color depth.
+RESULT: 8
+
+METHOD: getScreen
+DOC: function():string -- Get the address of the screen the GPU is currently bound to.
+RESULT: eb6d8b8b-e1ba-4624-85e3-580f264031fc
+
+METHOD: bitblt
+DOC: function([dst: number, col: number, row: number, width: number, height: number, src: number, fromCol: number, fromRow: number]):boolean -- bitblt from buffer to screen. All parameters are optional. Writes to `dst` page in rectangle `x, y, width, height`, defaults to the bound screen and its viewport. Reads data from `src` page at `fx, fy`, default is the active page from position 1, 1
+RESULT: skipped
+
+METHOD: getBackground
+DOC: function():number, boolean -- Get the current background color and whether it's from the palette or not.
+RESULT: 0, false
+
+METHOD: freeBuffer
+DOC: function(index: number): boolean -- Closes buffer at `index`. Returns true if a buffer closed. If the current buffer is closed, index moves to 0
+RESULT: skipped
+
+METHOD: getViewport
+DOC: function():number, number -- Get the current viewport resolution.
+RESULT: 160, 50
+
+METHOD: setResolution
+DOC: function(width:number, height:number):boolean -- Set the screen resolution. Returns true if the resolution changed.
+RESULT: skipped
+
+METHOD: totalMemory
+DOC: function(): number -- returns the total memory size of the gpu vram. This does not include the screen.
+RESULT: skipped
+
+METHOD: bind
+DOC: function(address:string[, reset:boolean=true]):boolean -- Binds the GPU to the screen with the specified address and resets screen settings if `reset` is true.
+RESULT: skipped
+
+METHOD: set
+DOC: function(x:number, y:number, value:string[, vertical:boolean]):boolean -- Plots a string value to the screen at the specified position. Optionally writes the string vertically.
+RESULT: skipped
+
+METHOD: freeMemory
+DOC: function(): number -- returns the total free memory not allocated to buffers. This does not include the screen.
+RESULT: skipped
+
+METHOD: setForeground
+DOC: function(value:number[, palette:boolean]):number, number or nil -- Sets the foreground color to the specified value. Optionally takes an explicit palette index. Returns the old value and if it was from the palette its palette index.
+RESULT: skipped
+
+METHOD: getPaletteColor
+DOC: function(index:number):number -- Get the palette color at the specified palette index.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: copy
+DOC: function(x:number, y:number, width:number, height:number, tx:number, ty:number):boolean -- Copies a portion of the screen from the specified location with the specified size by the specified translation.
+RESULT: skipped
+
+METHOD: getForeground
+DOC: function():number, boolean -- Get the current foreground color and whether it's from the palette or not.
+RESULT: 16777215, false
+
+METHOD: maxDepth
+DOC: function():number -- Get the maximum supported color depth.
+RESULT: skipped
+
+METHOD: freeAllBuffers
+DOC: function(): number -- Closes all buffers and returns the count. If the active buffer is closed, index moves to 0
+RESULT: skipped
+
+
+================================================
+ID: dedd56eb-bd28-4c66-98e1-15e76d390bca
+TYPE: htc_reactors_nuclear_reactor
+
+METHOD: getFluidCoolant
+DOC: function():int -- Получает текущий объём внутреннего буфера охлаждения.
+RESULT: 0
+
+METHOD: getReactorLevel
+DOC: function():int -- Уровень реактора.
+RESULT: 6
+
+METHOD: getEnergyGeneration
+DOC: function():long -- Получает текущую генерацию энергии.
+RESULT: 651840
+
+METHOD: deactivate
+DOC: function():boolean -- Выключает реактор.
+RESULT: skipped
+
+METHOD: getReactorComponents
+DOC: function():table -- Получает информацию о всех компонентах схемы реактора.
+RESULT: { 1={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 2={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 3={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 4={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 5={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 6={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 7={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 8={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 9={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 10={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 11={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 12={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 13={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 14={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 15={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 16={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 17={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 18={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 19={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 20={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 21={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 22={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 23={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 24={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 25={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 26={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 27={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 28={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 29={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 30={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 31={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 32={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 33={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 34={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 35={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 36={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 37={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 38={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 39={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 40={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 42={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 43={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 44={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 45={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 46={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 47={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 48={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 49={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 50={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 51={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 52={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 53={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 54={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 55={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 56={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 57={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 58={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 59={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 60={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 61={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 62={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 63={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 64={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 65={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 66={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 67={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 68={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 69={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 70={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 71={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 72={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 73={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 74={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 75={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 76={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 77={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 78={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 79={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 80={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 81={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 } }
+
+METHOD: getSelectStatusRod
+DOC: function(slot:int):table -- Получает информацию о топливном стержне в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: activate
+DOC: function():boolean -- Включает реактор.
+RESULT: skipped
+
+METHOD: getTemperature
+DOC: function():int -- Получает текущую температуру реактора.
+RESULT: 0
+
+METHOD: isFuelFilterActive
+DOC: function():boolean -- Проверяет, активен ли топливный фильтр.
+RESULT: false
+
+METHOD: setActiveCooling
+DOC: function(state:boolean):boolean -- Включает или выключает жидкостное охлаждение.
+RESULT: skipped
+
+METHOD: getReactorComponent
+DOC: function(slot:int):table -- Получает информацию о компоненте схемы в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getCoolantItem
+DOC: function(slot:int):table -- Получает информацию о предмете охлаждения в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getMaxFluidCoolant
+DOC: function():int -- Получает максимальный объём внутреннего буфера охлаждения.
+RESULT: 756000
+
+METHOD: getMaxTemperature
+DOC: function():int -- Получает максимальную температуру реактора.
+RESULT: 0
+
+METHOD: getAllFuelRodsStatus
+DOC: function():table -- Получает информацию о всех топливных стержнях.
+RESULT: { 1={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 2={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 3={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 4={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 5={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 7={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 8={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 10={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 12={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 13={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 15={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 24={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 17={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 18={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 20={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 21={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 22={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 }, 23={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7725, 7=maxFuel, 8=20000 } }
+
+METHOD: getFluidCoolantConsume
+DOC: function():int -- Получает потребление охлаждающей жидкости в секунду.
+RESULT: 691
+
+METHOD: isActiveCooling
+DOC: function():boolean -- Проверяет, активно ли жидкостное охлаждение.
+RESULT: false
+
+METHOD: hasWork
+DOC: function():boolean -- Проверяет, работает ли реактор.
+RESULT: true
+
+
+================================================
+ID: a7f302e5-1022-4f53-9047-385efcde4e6a
+TYPE: flux_plug
+
+METHOD: canExtract
+DOC: function():number -- Returns whether this component can have energy extracted from the connected side.
+RESULT: skipped
+
+METHOD: getEnergyStored
+DOC: function():number -- Returns the amount of stored energy on the connected side.
+RESULT: 0
+
+METHOD: getNetworkInfo
+DOC: <no doc>
+RESULT: { ownerUUID=05a939e5-a1c4-3e9d-a189-1c9046f713bc, securityType=encrypted, id=1, energyType=RF, averageTick=177, name=ArtemTverdokhleb's Netwo }
+
+METHOD: getMaxEnergyStored
+DOC: function():number -- Returns the maximum amount of stored energy on the connected side.
+RESULT: 2147483647
+
+METHOD: getCountInfo
+DOC: <no doc>
+RESULT: { storageCount=0, pointCount=77, plugCount=16, controllerCount=1 }
+
+METHOD: getEnergyInfo
+DOC: <no doc>
+RESULT: { energyInput=49528708, totalBuffer=11488, totalEnergy=0, energyOutput=45769468 }
+
+METHOD: getFluxInfo
+DOC: <no doc>
+RESULT: { transferLimit=262144, buffer=0, priority=0, surgeMode=true, unlimited=true, customName=Flux Plug }
+
+METHOD: canReceive
+DOC: function():number -- Returns whether this component can receive energy on the connected side.
+RESULT: skipped
+
+
+================================================
+ID: d4c600a9-e874-45b5-8742-acad84c1bc87
+TYPE: htc_reactors_nuclear_reactor
+
+METHOD: getFluidCoolant
+DOC: function():int -- Получает текущий объём внутреннего буфера охлаждения.
+RESULT: 0
+
+METHOD: getReactorLevel
+DOC: function():int -- Уровень реактора.
+RESULT: 6
+
+METHOD: getEnergyGeneration
+DOC: function():long -- Получает текущую генерацию энергии.
+RESULT: 651840
+
+METHOD: deactivate
+DOC: function():boolean -- Выключает реактор.
+RESULT: skipped
+
+METHOD: getReactorComponents
+DOC: function():table -- Получает информацию о всех компонентах схемы реактора.
+RESULT: { 1={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 2={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 3={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 4={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 5={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 6={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 7={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 8={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 9={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 10={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 11={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 12={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 13={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 14={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 15={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 16={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 17={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 18={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 19={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 20={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 21={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 22={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 23={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 24={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 25={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 26={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 27={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 28={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 29={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 30={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 31={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 32={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 33={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 34={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 35={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 36={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 37={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 38={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 39={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 40={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 42={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 43={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 44={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 45={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 46={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 47={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 48={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 49={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 50={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 51={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 52={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 53={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 54={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 55={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 56={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 57={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 58={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 59={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 60={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 61={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 62={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 63={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 64={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 65={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 66={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 67={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 68={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 69={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 70={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 71={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 72={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 73={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 74={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 75={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 76={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 77={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 78={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 79={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 80={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 81={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 } }
+
+METHOD: getSelectStatusRod
+DOC: function(slot:int):table -- Получает информацию о топливном стержне в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: activate
+DOC: function():boolean -- Включает реактор.
+RESULT: skipped
+
+METHOD: getTemperature
+DOC: function():int -- Получает текущую температуру реактора.
+RESULT: 0
+
+METHOD: isFuelFilterActive
+DOC: function():boolean -- Проверяет, активен ли топливный фильтр.
+RESULT: false
+
+METHOD: setActiveCooling
+DOC: function(state:boolean):boolean -- Включает или выключает жидкостное охлаждение.
+RESULT: skipped
+
+METHOD: getReactorComponent
+DOC: function(slot:int):table -- Получает информацию о компоненте схемы в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getCoolantItem
+DOC: function(slot:int):table -- Получает информацию о предмете охлаждения в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getMaxFluidCoolant
+DOC: function():int -- Получает максимальный объём внутреннего буфера охлаждения.
+RESULT: 756000
+
+METHOD: getMaxTemperature
+DOC: function():int -- Получает максимальную температуру реактора.
+RESULT: 0
+
+METHOD: getAllFuelRodsStatus
+DOC: function():table -- Получает информацию о всех топливных стержнях.
+RESULT: { 1={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 2={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 3={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 4={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 5={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 7={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 8={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 10={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 12={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 13={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 15={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 24={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 17={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 18={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 20={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 21={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 22={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 }, 23={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7751, 7=maxFuel, 8=20000 } }
+
+METHOD: getFluidCoolantConsume
+DOC: function():int -- Получает потребление охлаждающей жидкости в секунду.
+RESULT: 691
+
+METHOD: isActiveCooling
+DOC: function():boolean -- Проверяет, активно ли жидкостное охлаждение.
+RESULT: false
+
+METHOD: hasWork
+DOC: function():boolean -- Проверяет, работает ли реактор.
+RESULT: true
+
+
+================================================
+ID: bdbf9203-4aac-4cb0-ac01-cfc06bb59763
+TYPE: internet
+
+METHOD: isHttpEnabled
+DOC: function():boolean -- Returns whether HTTP requests can be made (config setting).
+RESULT: true
+
+METHOD: connect
+DOC: function(address:string[, port:number]):userdata -- Opens a new TCP connection. Returns the handle of the connection.
+RESULT: skipped
+
+METHOD: isTcpEnabled
+DOC: function():boolean -- Returns whether TCP connections can be made (config setting).
+RESULT: true
+
+METHOD: request
+DOC: function(url:string[, postData:string[, headers:table[, method:string]]]):userdata -- Starts an HTTP request. If this returns true, further results will be pushed using `http_response` signals.
+RESULT: skipped
+
+
+================================================
+ID: 3968b553-a768-44bd-a9cc-b1227ee97b0b
+TYPE: filesystem
+
+METHOD: lastModified
+DOC: function(path:string):number -- Returns the (real world) timestamp of when the object at the specified absolute path in the file system was modified.
+RESULT: skipped
+
+METHOD: open
+DOC: function(path:string[, mode:string='r']):userdata -- Opens a new file descriptor and returns its handle.
+RESULT: skipped
+
+METHOD: read
+DOC: function(handle:userdata, count:number):string or nil -- Reads up to the specified amount of data from an open file descriptor with the specified handle. Returns nil when EOF is reached.
+RESULT: skipped
+
+METHOD: rename
+DOC: function(from:string, to:string):boolean -- Renames/moves an object from the first specified absolute path in the file system to the second.
+RESULT: skipped
+
+METHOD: size
+DOC: function(path:string):number -- Returns the size of the object at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: getLabel
+DOC: function():string -- Get the current label of the drive.
+RESULT: openos
+
+METHOD: exists
+DOC: function(path:string):boolean -- Returns whether an object exists at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: setLabel
+DOC: function(value:string):string -- Sets the label of the drive. Returns the new value, which may be truncated.
+RESULT: skipped
+
+METHOD: makeDirectory
+DOC: function(path:string):boolean -- Creates a directory at the specified absolute path in the file system. Creates parent directories, if necessary.
+RESULT: skipped
+
+METHOD: isReadOnly
+DOC: function():boolean -- Returns whether the file system is read-only.
+RESULT: true
+
+METHOD: list
+DOC: function(path:string):table -- Returns a list of names of objects in the directory at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: write
+DOC: function(handle:userdata, value:string):boolean -- Writes the specified data to an open file descriptor with the specified handle.
+RESULT: skipped
+
+METHOD: spaceTotal
+DOC: function():number -- The overall capacity of the file system, in bytes.
+RESULT: skipped
+
+METHOD: seek
+DOC: function(handle:userdata, whence:string, offset:number):number -- Seeks in an open file descriptor with the specified handle. Returns the new pointer position.
+RESULT: skipped
+
+METHOD: remove
+DOC: function(path:string):boolean -- Removes the object at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: close
+DOC: function(handle:userdata) -- Closes an open file descriptor with the specified handle.
+RESULT: skipped
+
+METHOD: spaceUsed
+DOC: function():number -- The currently used capacity of the file system, in bytes.
+RESULT: skipped
+
+METHOD: isDirectory
+DOC: function(path:string):boolean -- Returns whether the object at the specified absolute path in the file system is a directory.
+RESULT_ERROR: bad arguments #1 (string expected, got no value)
+
+
+================================================
+ID: 6c819952-430f-4e2d-8f91-674fcf44841c
+TYPE: flux_plug
+
+METHOD: canExtract
+DOC: function():number -- Returns whether this component can have energy extracted from the connected side.
+RESULT: skipped
+
+METHOD: getEnergyStored
+DOC: function():number -- Returns the amount of stored energy on the connected side.
+RESULT: 0
+
+METHOD: getNetworkInfo
+DOC: <no doc>
+RESULT: { ownerUUID=05a939e5-a1c4-3e9d-a189-1c9046f713bc, securityType=encrypted, id=1, energyType=RF, averageTick=177, name=ArtemTverdokhleb's Netwo }
+
+METHOD: getMaxEnergyStored
+DOC: function():number -- Returns the maximum amount of stored energy on the connected side.
+RESULT: 2147483647
+
+METHOD: getCountInfo
+DOC: <no doc>
+RESULT: { storageCount=0, pointCount=77, plugCount=16, controllerCount=1 }
+
+METHOD: getEnergyInfo
+DOC: <no doc>
+RESULT: { energyInput=50183933, totalBuffer=12772, totalEnergy=0, energyOutput=50184347 }
+
+METHOD: getFluxInfo
+DOC: <no doc>
+RESULT: { transferLimit=262144, buffer=0, priority=0, surgeMode=true, unlimited=true, customName=Flux Plug }
+
+METHOD: canReceive
+DOC: function():number -- Returns whether this component can receive energy on the connected side.
+RESULT: skipped
+
+
+================================================
+ID: 5287c011-f1d4-4b3e-80dc-c726fa71d8c2
+TYPE: htc_reactors_nuclear_reactor
+
+METHOD: getFluidCoolant
+DOC: function():int -- Получает текущий объём внутреннего буфера охлаждения.
+RESULT: 221484
+
+METHOD: getReactorLevel
+DOC: function():int -- Уровень реактора.
+RESULT: 2
+
+METHOD: getEnergyGeneration
+DOC: function():long -- Получает текущую генерацию энергии.
+RESULT: 35389440
+
+METHOD: deactivate
+DOC: function():boolean -- Выключает реактор.
+RESULT: skipped
+
+METHOD: getReactorComponents
+DOC: function():table -- Получает информацию о всех компонентах схемы реактора.
+RESULT: { 1={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 2={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 3={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 4={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 5={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 6={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 7={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 8={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 9={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 10={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 11={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 12={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 13={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 14={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 15={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 16={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 17={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 18={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 19={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 20={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 21={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 22={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 23={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 24={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 25={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 26={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 27={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 28={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 29={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 30={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 31={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 32={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 33={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 34={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 35={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 36={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 37={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 38={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 39={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 40={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 42={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 43={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 44={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 45={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 46={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 47={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 48={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 49={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 50={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 51={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 52={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 53={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 54={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 55={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 56={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 57={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 58={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 59={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 60={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 61={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=2, 5=meta, 6=0 }, 62={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 63={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 64={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 65={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 66={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 67={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 68={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 69={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 70={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 71={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 72={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 73={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 74={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 75={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 76={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 77={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 78={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 79={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 80={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 }, 81={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=2, 5=meta, 6=0 } }
+
+METHOD: getSelectStatusRod
+DOC: function(slot:int):table -- Получает информацию о топливном стержне в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: activate
+DOC: function():boolean -- Включает реактор.
+RESULT: skipped
+
+METHOD: getTemperature
+DOC: function():int -- Получает текущую температуру реактора.
+RESULT: 0
+
+METHOD: isFuelFilterActive
+DOC: function():boolean -- Проверяет, активен ли топливный фильтр.
+RESULT: false
+
+METHOD: setActiveCooling
+DOC: function(state:boolean):boolean -- Включает или выключает жидкостное охлаждение.
+RESULT: skipped
+
+METHOD: getReactorComponent
+DOC: function(slot:int):table -- Получает информацию о компоненте схемы в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getCoolantItem
+DOC: function(slot:int):table -- Получает информацию о предмете охлаждения в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getMaxFluidCoolant
+DOC: function():int -- Получает максимальный объём внутреннего буфера охлаждения.
+RESULT: 252000
+
+METHOD: getMaxTemperature
+DOC: function():int -- Получает максимальную температуру реактора.
+RESULT: 0
+
+METHOD: getAllFuelRodsStatus
+DOC: function():table -- Получает информацию о всех топливных стержнях.
+RESULT: { 16={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=1988, 7=maxFuel, 8=8000 }, 17={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=3496, 7=maxFuel, 8=8000 }, 2={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=7408, 7=maxFuel, 8=8000 }, 19={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=5006, 7=maxFuel, 8=8000 }, 4={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=5840, 7=maxFuel, 8=8000 }, 5={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=6584, 7=maxFuel, 8=8000 }, 10={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=218, 7=maxFuel, 8=8000 }, 12={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=246, 7=maxFuel, 8=8000 }, 13={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=614, 7=maxFuel, 8=8000 }, 18={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4262, 7=maxFuel, 8=8000 }, 15={ 1=item, 2=htc_reactors:quad_californium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=1210, 7=maxFuel, 8=8000 } }
+
+METHOD: getFluidCoolantConsume
+DOC: function():int -- Получает потребление охлаждающей жидкости в секунду.
+RESULT: 76
+
+METHOD: isActiveCooling
+DOC: function():boolean -- Проверяет, активно ли жидкостное охлаждение.
+RESULT: true
+
+METHOD: hasWork
+DOC: function():boolean -- Проверяет, работает ли реактор.
+RESULT: true
+
+
+================================================
+ID: 4e2aa465-0ecb-47b5-8d4d-d49225f3d9d1
+TYPE: computer
+
+METHOD: isRunning
+DOC: function():boolean -- Returns whether the computer is running.
+RESULT: true
+
+METHOD: stop
+DOC: function():boolean -- Stops the computer. Returns true if the state changed.
+RESULT: skipped
+
+METHOD: start
+DOC: function():boolean -- Starts the computer. Returns true if the state changed.
+RESULT: skipped
+
+METHOD: getProgramLocations
+DOC: function():table -- Returns a map of program name to disk label for known programs.
+RESULT: { 1={ 1=dig, 2=dig }, 2={ 1=oppm, 2=oppm }, 3={ 1=md5sum, 2=data }, 4={ 1=tape, 2=tape }, 5={ 1=maze, 2=maze }, 6={ 1=sha256sum, 2=data }, 7={ 1=irc, 2=irc }, 8={ 1=deflate, 2=data }, 9={ 1=gpg, 2=data }, 10={ 1=explode, 2=explode }, 11={ 1=ifconfig, 2=network }, 12={ 1=ping, 2=network }, 13={ 1=base64, 2=data }, 14={ 1=route, 2=network }, 15={ 1=inflate, 2=data }, 16={ 1=arp, 2=network }, 17={ 1=opl-flash, 2=openloader }, 18={ 1=build, 2=builder }, 19={ 1=refuel, 2=generator } }
+
+METHOD: getDeviceInfo
+DOC: function():table -- Collect information on all connected devices.
+RESULT: { fb3fc384-e648-4b54-94a7-a94623786b33={ vendor=MightyPirates GmbH & Co. KG, product=Spinner 520p1, description=Floppy disk drive, class=disk }, da14fb62-e2f9-4057-b2f2-60f55249ed71={ description=Memory bank, clock=1500, product=Multipurpose RAM Type, vendor=MightyPirates GmbH & Co. KG, class=memory }, 3ea4ef4a-03ea-4c59-ae38-67318c33fea1={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, fb3ab09e-b315-49a1-89e3-62a5dc995e5b={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, a5cabd8c-f0fc-4ff2-9c75-8f1657214916={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, 47dcb7d9-6bff-4db4-8604-df3677cdc75c={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, 6e942a0b-bf25-4fa1-8afb-93d8ae1c5a9f={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, ab840616-0267-47d9-89ce-9e76e30d09e4={ vendor=MightyPirates GmbH & Co. KG, product=Fancytyper MX-Stone, description=Keyboard, class=input }, 8a9700ad-65cd-41c6-9180-df2a12e9dec8={ description=EEPROM, vendor=MightyPirates GmbH & Co. KG, capacity=4096, product=FlashStick2k, class=memory, size=4096 }, ffe357ec-2782-4878-90a3-c62d86edcbfd={ description=Memory bank, clock=1500, product=Multipurpose RAM Type, vendor=MightyPirates GmbH & Co. KG, class=memory }, 06713df6-ab10-4d39-bbf8-c119eb497517={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, 3968b553-a768-44bd-a9cc-b1227ee97b0b={ description=Filesystem, capacity=395496, clock=20/20/20, vendor=MightyPirates GmbH & Co. KG, product=MPFS.21.6, class=volume, size=386227 }, ceaa6046-a1cd-40e1-82de-ed5080a2d9f8={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, 4e2aa465-0ecb-47b5-8d4d-d49225f3d9d1={ description=Server, vendor=MightyPirates GmbH & Co. KG, product=Blader, capacity=17, class=system }, 0738aa99-fe6d-4cb0-9d44-772e83e0bfa0={ description=Memory bank, clock=1500, product=Multipurpose RAM Type, vendor=MightyPirates GmbH & Co. KG, class=memory }, 250187b3-f080-4734-a310-8b89a6adc164={ description=Graphics controller, capacity=8000, clock=2560/2560/320/5120/1280/2560, product=MPG3000 GTZ, width=8, vendor=MightyPirates GmbH & Co. KG, class=display }, b8bec44e-44fa-401d-81da-7181f3798583={ description=Filesystem, capacity=4294967, clock=200/200/80, vendor=MightyPirates GmbH & Co. KG, product=MPFS.21.6, class=volume, size=4194304 }, bdbf9203-4aac-4cb0-ac01-cfc06bb59763={ vendor=MightyPirates GmbH & Co. KG, product=SuperLink X-D4NK, description=Internet modem, class=communication }, 46e968a8-10d0-4a05-8048-e6bf63d996b8={ vendor=MightyPirates GmbH & Co. KG, product=Multiplug Ext.1, description=Adapter, class=bus }, eb6d8b8b-e1ba-4624-85e3-580f264031fc={ description=Text buffer, vendor=MightyPirates GmbH & Co. KG, capacity=8000, width=8, product=Text Screen V0, class=display }, 5d61238e-bbc6-4f01-932c-f6bd486a7193={ description=CPU, clock=1500, product=FlexiArch 3 Processor, vendor=MightyPirates GmbH & Co. KG, class=processor }, dd02f64b-6631-4034-8f59-494e0f45233a={ description=Filesystem, capacity=67108, clock=260/260/100, vendor=MightyPirates GmbH & Co. KG, product=MPFS.21.6, class=volume, size=65536 }, 55daed8f-8c91-4a59-aab6-ff807917bec3={ description=Memory bank, clock=1500, product=Multipurpose RAM Type, vendor=MightyPirates GmbH & Co. KG, class=memory }, 05a84dda-722f-424d-b840-9f13339bf0cc={ description=Text buffer, vendor=MightyPirates GmbH & Co. KG, capacity=8000, width=8, product=Text Screen V0, class=display } }
+
+METHOD: beep
+DOC: function([frequency:string or number[, duration:number]]) -- Plays a tone, useful to alert users via audible feedback.
+RESULT: skipped
+
+
+================================================
+ID: dd02f64b-6631-4034-8f59-494e0f45233a
+TYPE: filesystem
+
+METHOD: lastModified
+DOC: function(path:string):number -- Returns the (real world) timestamp of when the object at the specified absolute path in the file system was modified.
+RESULT: skipped
+
+METHOD: open
+DOC: function(path:string[, mode:string='r']):userdata -- Opens a new file descriptor and returns its handle.
+RESULT: skipped
+
+METHOD: read
+DOC: function(handle:userdata, count:number):string or nil -- Reads up to the specified amount of data from an open file descriptor with the specified handle. Returns nil when EOF is reached.
+RESULT: skipped
+
+METHOD: rename
+DOC: function(from:string, to:string):boolean -- Renames/moves an object from the first specified absolute path in the file system to the second.
+RESULT: skipped
+
+METHOD: size
+DOC: function(path:string):number -- Returns the size of the object at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: getLabel
+DOC: function():string -- Get the current label of the drive.
+RESULT: tmpfs
+
+METHOD: exists
+DOC: function(path:string):boolean -- Returns whether an object exists at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: setLabel
+DOC: function(value:string):string -- Sets the label of the drive. Returns the new value, which may be truncated.
+RESULT: skipped
+
+METHOD: makeDirectory
+DOC: function(path:string):boolean -- Creates a directory at the specified absolute path in the file system. Creates parent directories, if necessary.
+RESULT: skipped
+
+METHOD: isReadOnly
+DOC: function():boolean -- Returns whether the file system is read-only.
+RESULT: false
+
+METHOD: list
+DOC: function(path:string):table -- Returns a list of names of objects in the directory at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: write
+DOC: function(handle:userdata, value:string):boolean -- Writes the specified data to an open file descriptor with the specified handle.
+RESULT: skipped
+
+METHOD: spaceTotal
+DOC: function():number -- The overall capacity of the file system, in bytes.
+RESULT: skipped
+
+METHOD: seek
+DOC: function(handle:userdata, whence:string, offset:number):number -- Seeks in an open file descriptor with the specified handle. Returns the new pointer position.
+RESULT: skipped
+
+METHOD: remove
+DOC: function(path:string):boolean -- Removes the object at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: close
+DOC: function(handle:userdata) -- Closes an open file descriptor with the specified handle.
+RESULT: skipped
+
+METHOD: spaceUsed
+DOC: function():number -- The currently used capacity of the file system, in bytes.
+RESULT: skipped
+
+METHOD: isDirectory
+DOC: function(path:string):boolean -- Returns whether the object at the specified absolute path in the file system is a directory.
+RESULT_ERROR: bad arguments #1 (string expected, got no value)
+
+
+================================================
+ID: cac3977e-9258-4b7d-99b2-dbd92cf17f02
+TYPE: flux_controller
+
+METHOD: getNetworkInfo
+DOC: <no doc>
+RESULT: { ownerUUID=05a939e5-a1c4-3e9d-a189-1c9046f713bc, securityType=encrypted, id=1, energyType=RF, averageTick=203, name=ArtemTverdokhleb's Netwo }
+
+METHOD: getEnergyInfo
+DOC: <no doc>
+RESULT: { energyInput=50308962, totalBuffer=12637, totalEnergy=0, energyOutput=50309076 }
+
+METHOD: getFluxInfo
+DOC: <no doc>
+RESULT: { transferLimit=262144, buffer=11124, priority=0, surgeMode=false, unlimited=true, customName=Flux Controller }
+
+METHOD: getCountInfo
+DOC: <no doc>
+RESULT: { storageCount=0, pointCount=77, plugCount=16, controllerCount=1 }
+
+
+================================================
+ID: 75ed53ba-c7ac-466f-96dc-0027dccbd0b2
+TYPE: htc_reactors_nuclear_reactor
+
+METHOD: getFluidCoolant
+DOC: function():int -- Получает текущий объём внутреннего буфера охлаждения.
+RESULT: 0
+
+METHOD: getReactorLevel
+DOC: function():int -- Уровень реактора.
+RESULT: 6
+
+METHOD: getEnergyGeneration
+DOC: function():long -- Получает текущую генерацию энергии.
+RESULT: 651840
+
+METHOD: deactivate
+DOC: function():boolean -- Выключает реактор.
+RESULT: skipped
+
+METHOD: getReactorComponents
+DOC: function():table -- Получает информацию о всех компонентах схемы реактора.
+RESULT: { 1={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 2={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 3={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 4={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 5={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 6={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 7={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 8={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 9={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 10={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 11={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 12={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 13={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 14={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 15={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 16={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 17={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 18={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 19={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 20={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 21={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 22={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 23={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 24={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 25={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 26={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 27={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 28={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 29={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 30={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 31={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 32={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 33={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 34={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 35={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 36={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 37={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 38={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 39={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 40={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 42={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 43={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 44={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 45={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 46={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 47={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 48={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 49={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 50={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 51={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 52={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 53={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 54={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 55={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 56={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 57={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 58={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 59={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 60={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 61={ 1=item, 2=htc_reactors:beryllium_heat_exchanger, 3=count, 4=6, 5=meta, 6=0 }, 62={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 63={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 64={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 65={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 66={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 67={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 68={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 69={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 70={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 71={ 1=item, 2=htc_reactors:beryllium_hybrid_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 72={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 73={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 74={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 75={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 76={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 77={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 78={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 79={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 80={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 }, 81={ 1=item, 2=htc_reactors:beryllium_overclocked_heat_vent, 3=count, 4=6, 5=meta, 6=0 } }
+
+METHOD: getSelectStatusRod
+DOC: function(slot:int):table -- Получает информацию о топливном стержне в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: activate
+DOC: function():boolean -- Включает реактор.
+RESULT: skipped
+
+METHOD: getTemperature
+DOC: function():int -- Получает текущую температуру реактора.
+RESULT: 0
+
+METHOD: isFuelFilterActive
+DOC: function():boolean -- Проверяет, активен ли топливный фильтр.
+RESULT: false
+
+METHOD: setActiveCooling
+DOC: function(state:boolean):boolean -- Включает или выключает жидкостное охлаждение.
+RESULT: skipped
+
+METHOD: getReactorComponent
+DOC: function(slot:int):table -- Получает информацию о компоненте схемы в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getCoolantItem
+DOC: function(slot:int):table -- Получает информацию о предмете охлаждения в указанном слоте.
+RESULT_ERROR: bad arguments #1 (integer expected, got no value)
+
+METHOD: getMaxFluidCoolant
+DOC: function():int -- Получает максимальный объём внутреннего буфера охлаждения.
+RESULT: 756000
+
+METHOD: getMaxTemperature
+DOC: function():int -- Получает максимальную температуру реактора.
+RESULT: 9999
+
+METHOD: getAllFuelRodsStatus
+DOC: function():table -- Получает информацию о всех топливных стержнях.
+RESULT: { 1={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 2={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 3={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 4={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 5={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 7={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 8={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 10={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 12={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 13={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 15={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 24={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 17={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 18={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 20={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 21={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 22={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 }, 23={ 1=item, 2=htc_reactors:sixteen_uranium_fuel_rod, 3=type, 4=fuelrod, 5=fuel, 6=4134, 7=maxFuel, 8=20000 } }
+
+METHOD: getFluidCoolantConsume
+DOC: function():int -- Получает потребление охлаждающей жидкости в секунду.
+RESULT: 691
+
+METHOD: isActiveCooling
+DOC: function():boolean -- Проверяет, активно ли жидкостное охлаждение.
+RESULT: false
+
+METHOD: hasWork
+DOC: function():boolean -- Проверяет, работает ли реактор.
+RESULT: true
+
+
+================================================
+ID: 03457c72-87f4-43c6-b6e2-3800709f243d
+TYPE: flux_plug
+
+METHOD: canExtract
+DOC: function():number -- Returns whether this component can have energy extracted from the connected side.
+RESULT: skipped
+
+METHOD: getEnergyStored
+DOC: function():number -- Returns the amount of stored energy on the connected side.
+RESULT: 0
+
+METHOD: getNetworkInfo
+DOC: <no doc>
+RESULT: { ownerUUID=05a939e5-a1c4-3e9d-a189-1c9046f713bc, securityType=encrypted, id=1, energyType=RF, averageTick=191, name=ArtemTverdokhleb's Netwo }
+
+METHOD: getMaxEnergyStored
+DOC: function():number -- Returns the maximum amount of stored energy on the connected side.
+RESULT: 2147483647
+
+METHOD: getCountInfo
+DOC: <no doc>
+RESULT: { storageCount=0, pointCount=77, plugCount=16, controllerCount=1 }
+
+METHOD: getEnergyInfo
+DOC: <no doc>
+RESULT: { energyInput=50361445, totalBuffer=12575, totalEnergy=0, energyOutput=50361177 }
+
+METHOD: getFluxInfo
+DOC: <no doc>
+RESULT: { transferLimit=262144, buffer=0, priority=0, surgeMode=true, unlimited=true, customName=Flux Plug }
+
+METHOD: canReceive
+DOC: function():number -- Returns whether this component can receive energy on the connected side.
+RESULT: skipped
+
+
+================================================
+ID: b8bec44e-44fa-401d-81da-7181f3798583
+TYPE: filesystem
+
+METHOD: lastModified
+DOC: function(path:string):number -- Returns the (real world) timestamp of when the object at the specified absolute path in the file system was modified.
+RESULT: skipped
+
+METHOD: open
+DOC: function(path:string[, mode:string='r']):userdata -- Opens a new file descriptor and returns its handle.
+RESULT: skipped
+
+METHOD: read
+DOC: function(handle:userdata, count:number):string or nil -- Reads up to the specified amount of data from an open file descriptor with the specified handle. Returns nil when EOF is reached.
+RESULT: skipped
+
+METHOD: rename
+DOC: function(from:string, to:string):boolean -- Renames/moves an object from the first specified absolute path in the file system to the second.
+RESULT: skipped
+
+METHOD: size
+DOC: function(path:string):number -- Returns the size of the object at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: getLabel
+DOC: function():string -- Get the current label of the drive.
+RESULT: OpenOS
+
+METHOD: exists
+DOC: function(path:string):boolean -- Returns whether an object exists at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: setLabel
+DOC: function(value:string):string -- Sets the label of the drive. Returns the new value, which may be truncated.
+RESULT: skipped
+
+METHOD: makeDirectory
+DOC: function(path:string):boolean -- Creates a directory at the specified absolute path in the file system. Creates parent directories, if necessary.
+RESULT: skipped
+
+METHOD: isReadOnly
+DOC: function():boolean -- Returns whether the file system is read-only.
+RESULT: false
+
+METHOD: list
+DOC: function(path:string):table -- Returns a list of names of objects in the directory at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: write
+DOC: function(handle:userdata, value:string):boolean -- Writes the specified data to an open file descriptor with the specified handle.
+RESULT: skipped
+
+METHOD: spaceTotal
+DOC: function():number -- The overall capacity of the file system, in bytes.
+RESULT: skipped
+
+METHOD: seek
+DOC: function(handle:userdata, whence:string, offset:number):number -- Seeks in an open file descriptor with the specified handle. Returns the new pointer position.
+RESULT: skipped
+
+METHOD: remove
+DOC: function(path:string):boolean -- Removes the object at the specified absolute path in the file system.
+RESULT: skipped
+
+METHOD: close
+DOC: function(handle:userdata) -- Closes an open file descriptor with the specified handle.
+RESULT: skipped
+
+METHOD: spaceUsed
+DOC: function():number -- The currently used capacity of the file system, in bytes.
+RESULT: skipped
+
+METHOD: isDirectory
+DOC: function(path:string):boolean -- Returns whether the object at the specified absolute path in the file system is a directory.
+RESULT_ERROR: bad arguments #1 (string expected, got no value)
+
+

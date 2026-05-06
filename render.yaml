@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: reactors-full
+    env: node
+    plan: free
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: OC_AGENT_TOKEN
+        sync: false
+      - key: SYNC_INTERVAL_SECONDS
+        value: "45"

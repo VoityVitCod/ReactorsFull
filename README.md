@@ -46,6 +46,36 @@ node /Users/artyom/Documents/Реакторы/server.js
 
 По умолчанию сайт поднимется на `http://0.0.0.0:8080`.
 
+## Деплой на Render
+
+Для Render этот проект нужно запускать как **Web Service**, а не как `Static Site`.
+
+В репозитории уже лежат:
+
+- [package.json](/Users/artyom/Documents/Реакторы/package.json)
+- [render.yaml](/Users/artyom/Documents/Реакторы/render.yaml)
+
+Если создаёте сервис руками в `dashboard.render.com`, выставьте так:
+
+- `Service Type` — `Web Service`
+- `Environment` — `Node`
+- `Build Command` — можно оставить пустым или `npm install`
+- `Start Command` — `node server.js`
+
+Обязательно задайте переменную окружения:
+
+- `OC_AGENT_TOKEN` — токен для OpenComputers-агента
+
+Опционально:
+
+- `SYNC_INTERVAL_SECONDS=45`
+
+Для проверки здоровья сервис уже умеет:
+
+- `GET /api/health`
+
+Если Render показывает `Exited with status 127`, это обычно значит, что сервис создан не тем типом или запускается не той командой.
+
 ### Переменные окружения
 
 - `PORT` — порт сайта, по умолчанию `8080`.

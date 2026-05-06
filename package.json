@@ -1,0 +1,14 @@
+{
+  "name": "reactors-full",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reactor control dashboard for OpenComputers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

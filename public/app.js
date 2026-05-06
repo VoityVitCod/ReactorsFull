@@ -147,6 +147,26 @@ function icon(name, className = "") {
       <path d="m12 20v-9.5" />
       <path d="m4 6.5 8 4.5 8-4.5" />
     `,
+    network: `
+      <circle cx="6" cy="12" r="2" />
+      <circle cx="18" cy="7" r="2" />
+      <circle cx="18" cy="17" r="2" />
+      <path d="M8 12h4" />
+      <path d="m14 11 2.4-2.4" />
+      <path d="m14 13 2.4 2.4" />
+    `,
+    plug: `
+      <path d="M9 7v5" />
+      <path d="M15 7v5" />
+      <path d="M8 12h8v2a4 4 0 0 1-4 4 4 4 0 0 1-4-4v-2Z" />
+      <path d="M12 18v3" />
+    `,
+    server: `
+      <rect x="4" y="5" width="16" height="5" rx="1.4" />
+      <rect x="4" y="14" width="16" height="5" rx="1.4" />
+      <path d="M7.5 7.5h.01M7.5 16.5h.01" />
+      <path d="M11 7.5h5M11 16.5h5" />
+    `,
   };
 
   return `
@@ -751,10 +771,118 @@ function renderLogRows(entries) {
   `;
 }
 
+function renderDetailList(rows, tone = "") {
+  return `
+    <div class="detail-list ${tone ? `detail-list--${tone}` : ""}">
+      ${rows
+        .map(
+          (row) => `
+            <div class="detail-list__row">
+              <span>${escapeHtml(row.label)}</span>
+              <strong>${escapeHtml(row.value)}</strong>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderStatusSurface({
+  iconName = "info",
+  eyebrow = "Status",
+  title,
+  message,
+  tone = "muted",
+  rows = [],
+}) {
+  return `
+    <article class="status-surface status-surface--${tone}">
+      <div class="status-surface__icon">${icon(iconName)}</div>
+      <div class="status-surface__copy">
+        <p class="status-surface__eyebrow">${escapeHtml(eyebrow)}</p>
+        <h4>${escapeHtml(title)}</h4>
+        <p>${escapeHtml(message)}</p>
+      </div>
+      ${rows.length ? renderDetailList(rows, tone) : ""}
+    </article>
+  `;
+}
+
+function stationConnectionMeta(station) {
+  if (!station) {
+    return {
+      tone: "warn",
+      label: "Нет подключения",
+      message: "Сервер ещё не получил первый отчёт от OpenComputers-компьютера.",
+    };
+  }
+
+  if (station.isStale) {
+    return {
+      tone: "danger",
+      label: "Пакет устарел",
+      message: `Последняя телеметрия пришла ${relativeAgeText(station.lastSeenAt)} и уже считается устаревшей.`,
+    };
+  }
+
+  return {
+    tone: "good",
+    label: "Онлайн",
+    message: `Станция ${station.stationName} обновилась ${relativeAgeText(station.lastSeenAt)}.`,
+  };
+}
+
+function missingSourceMessage(station, subject) {
+  if (!station) {
+    return `Станция ещё не подключилась, поэтому данные для "${subject}" пока отсутствуют.`;
+  }
+
+  if (station.isStale) {
+    return `Станция есть, но пакет устарел, поэтому состояние "${subject}" сейчас не подтверждено.`;
+  }
+
+  return `Станция подключена, но в последнем отчёте нет блока "${subject}".`;
+}
+
+function renderOverviewReactorCard(reactor) {
+  const meta = reactorStateMeta(reactor);
+
+  return `
+    <article class="overview-reactor-card" style="--reactor-art:url('assets/reactors/level-${reactor.level}.webp')">
+      <div class="overview-reactor-card__art"></div>
+      <div class="overview-reactor-card__body">
+        <div class="overview-reactor-card__head">
+          <div>
+            <h4>${escapeHtml(reactor.name)}</h4>
+            <p>${escapeHtml(reactor.stationName)}</p>
+          </div>
+          <span class="${meta.badgeClass}">${meta.label}</span>
+        </div>
+        <div class="overview-reactor-card__specs">
+          <span>Уровень ${reactor.level}</span>
+          <span>${coolingLabel(reactor)}</span>
+          <span>${formatRate(reactor.energyGeneration)}</span>
+        </div>
+        <div class="overview-reactor-card__bars">
+          <div class="meter">
+            <div class="meter__head"><span>Топливо</span><strong>${formatPercent(reactor.fuelRatio)}</strong></div>
+            <div class="meter__track"><div class="meter__fill" style="width:${reactor.fuelRatio}%"></div></div>
+          </div>
+          <div class="meter">
+            <div class="meter__head"><span>Охлаждение</span><strong>${formatPercent(reactor.coolantRatio)}</strong></div>
+            <div class="meter__track"><div class="meter__fill meter__fill--coolant" style="width:${reactor.coolantRatio}%"></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
 function renderSidebar(data) {
   const liveTone = data.overview.hasLiveData ? "good" : "warn";
   const liveLabel = data.overview.hasLiveData ? "Станции на связи" : "Ожидание станции";
-  const totalReactors = data.overview.totalReactors || SHOWCASE_LEVELS.length;
+  const totalReactors = data.overview.totalReactors;
 
   sidebarNavNode.innerHTML = `
     <div class="sidebar__status">
@@ -788,242 +916,238 @@ function renderTopbar(data) {
 function renderOverviewPage(data) {
   const reactors = getAllReactors(data);
   const sortedReactors = [...reactors].sort((left, right) => right.energyGeneration - left.energyGeneration);
+  const primaryStation = getPrimaryStation(data);
   const primaryReactor = sortedReactors[0] || { level: 6, name: "Реакторный контур" };
   const heroHistory = (getPrimaryFlux(data)?.history || []).map((point) => Number(point.outputPerTick) || 0);
-  const entries = buildLogEntries(data).slice(0, 4);
+  const entries = buildLogEntries(data).slice(0, 5);
   const efficiency = averageEfficiency(reactors);
   const flux = getPrimaryFlux(data);
   const heroArt = `assets/reactors/level-${primaryReactor.level || 6}.webp`;
   const hasLiveData = data.overview.hasLiveData;
-  const totalReactors = data.overview.totalReactors || SHOWCASE_LEVELS.length;
+  const totalReactors = data.overview.totalReactors;
   const queuedCommands = activeCommandCount(data.commands);
-  const meStored = getPrimaryStation(data)?.me?.storedPower || 0;
-  const showcaseCards = (
-    sortedReactors.length
-      ? sortedReactors.slice(0, 3).map((reactor) => {
-          const meta = reactorStateMeta(reactor);
-          return `
-            <article class="overview-preview" style="--preview-art:url('assets/reactors/level-${reactor.level}.webp')">
-              <div class="overview-preview__veil"></div>
-              <div class="overview-preview__body">
-                <div>
-                  <span class="${meta.badgeClass}">${meta.label}</span>
-                  <h4>${escapeHtml(reactor.name)}</h4>
-                  <p>${escapeHtml(reactor.stationName)}</p>
-                </div>
-                <div class="overview-preview__meta">
-                  <span>Выход</span>
-                  <strong>${formatRate(reactor.energyGeneration)}</strong>
-                </div>
-              </div>
-            </article>
-          `;
-        })
-      : SHOWCASE_LEVELS.slice(0, 3).map(
-          (level) => `
-            <article class="overview-preview overview-preview--placeholder" style="--preview-art:url('assets/reactors/level-${level}.webp')">
-              <div class="overview-preview__veil"></div>
-              <div class="overview-preview__body">
-                <div>
-                  <span class="badge badge--muted">Standby</span>
-                  <h4>Контур уровня ${level}</h4>
-                  <p>Ждём первую телеметрию</p>
-                </div>
-                <div class="overview-preview__meta">
-                  <span>Режим</span>
-                  <strong>Подготовка</strong>
-                </div>
-              </div>
-            </article>
-          `
-        )
-  ).join("");
+  const me = primaryStation?.me || null;
+  const meStored = me?.storedPower || 0;
+  const connectionMeta = stationConnectionMeta(primaryStation);
+  const highestLevel = reactors.length ? Math.max(...reactors.map((reactor) => reactor.level)) : null;
+  const commandRows = [
+    { label: "Станция", value: primaryStation ? primaryStation.stationName : "нет подключения" },
+    { label: "Последний пакет", value: primaryStation ? relativeAgeText(primaryStation.lastSeenAt) : "нет данных" },
+    { label: "Команды в очереди", value: `${queuedCommands}` },
+    { label: "Ручное управление", value: hasLiveData ? "доступно" : "заблокировано" },
+  ];
+  const fluxCountTotal = flux
+    ? (flux.countInfo?.pointCount || 0) +
+      (flux.countInfo?.plugCount || 0) +
+      (flux.countInfo?.controllerCount || 0) +
+      (flux.countInfo?.storageCount || 0)
+    : 0;
+  const reactorSectionContent = reactors.length
+    ? `
+        <div class="overview-reactor-grid">
+          ${sortedReactors.slice(0, 4).map(renderOverviewReactorCard).join("")}
+        </div>
+      `
+    : `
+        <div class="status-grid">
+          ${renderStatusSurface({
+            iconName: "server",
+            eyebrow: "OpenComputers",
+            title: "Станция ещё не подключена",
+            message: "Сервер не получил ни одного живого отчёта, поэтому реакторные карточки пока не могут быть построены.",
+            tone: "warn",
+            rows: [
+              { label: "API /agent/report", value: "ожидание" },
+              { label: "Команды", value: "заблокированы" },
+            ],
+          })}
+          ${renderStatusSurface({
+            iconName: "reactor",
+            eyebrow: "Reactors",
+            title: "Нет данных по реакторам",
+            message: "Как только агент пришлёт список реакторов, здесь появятся реальные уровни, охлаждение и генерация.",
+            tone: "muted",
+          })}
+          ${renderStatusSurface({
+            iconName: "clock",
+            eyebrow: "Sync",
+            title: "Ждём первую синхронизацию",
+            message: `Интервал обмена уже настроен на ${data.syncIntervalSeconds || 45} секунд, осталось дождаться первого пакета.`,
+            tone: "muted",
+          })}
+        </div>
+      `;
+  const generationPanelContent = flux && flux.history && flux.history.length
+    ? `
+        <div class="chart-block">
+          <div class="chart-block__summary">
+            <strong>${formatRate(data.overview.totalGeneration)}</strong>
+            <span>${hasLiveData ? `Средний выход по истории: ${formatRate(flux.historySummary?.averageOutputPerTick || 0)}` : "Живая история появится после накопления пакетов."}</span>
+          </div>
+          ${renderLineChart(heroHistory, { width: 760, height: 240 })}
+        </div>
+      `
+    : renderStatusSurface({
+        iconName: "chart",
+        eyebrow: "Energy graph",
+        title: "История генерации недоступна",
+        message: missingSourceMessage(primaryStation, "энергетической истории"),
+        tone: connectionMeta.tone === "good" ? "muted" : connectionMeta.tone,
+      });
+  const topologyPanelContent = flux && fluxCountTotal > 0
+    ? `
+        <div class="topology-block">
+          ${renderDonutChart([
+            { label: "Точки", value: flux.countInfo?.pointCount || 0, color: "#3ad7ff" },
+            { label: "Плаги", value: flux.countInfo?.plugCount || 0, color: "#55f39f" },
+            { label: "Контроллеры", value: flux.countInfo?.controllerCount || 0, color: "#ffc46b" },
+            { label: "Хранилища", value: flux.countInfo?.storageCount || 0, color: "#7d8d96" },
+          ])}
+          <div class="topology-block__summary">
+            <strong>${fluxCountTotal}</strong>
+            <span>всего элементов Flux-сети</span>
+          </div>
+        </div>
+      `
+    : renderStatusSurface({
+        iconName: "network",
+        eyebrow: "Flux topology",
+        title: "Топология сети пока недоступна",
+        message: missingSourceMessage(primaryStation, "Flux-сети"),
+        tone: connectionMeta.tone === "good" ? "muted" : connectionMeta.tone,
+      });
+  const mePanelContent = me
+    ? renderDetailList([
+        { label: "Статус", value: me.online ? "онлайн" : "оффлайн" },
+        { label: "Накоплено", value: formatAe(me.storedPower) },
+        { label: "Инжекция", value: `${compactNumber(me.avgPowerInjection, 2)} AE/t` },
+        { label: "Потребление", value: `${compactNumber(me.avgPowerUsage, 2)} AE/t` },
+        { label: "Хладагент", value: me.lowTempCoolant ? formatFluid(me.lowTempCoolant.amount) : "нет данных" },
+      ])
+    : renderStatusSurface({
+        iconName: "network",
+        eyebrow: "ME",
+        title: "ME-сеть не обнаружена",
+        message: missingSourceMessage(primaryStation, "ME-сети"),
+        tone: connectionMeta.tone === "good" ? "muted" : connectionMeta.tone,
+      });
+  const fluxPanelContent = flux
+    ? renderDetailList([
+        { label: "Сеть", value: flux.name || flux.networkId },
+        { label: "Буфер", value: formatEnergy(flux.buffer) },
+        { label: "Вход", value: formatRate(flux.inputPerTick) },
+        { label: "Выход", value: formatRate(flux.outputPerTick) },
+        { label: "Лимит", value: flux.transferLimit ? formatRate(flux.transferLimit) : "нет данных" },
+        { label: "Surge", value: flux.surgeMode ? "да" : "нет" },
+      ])
+    : renderStatusSurface({
+        iconName: "plug",
+        eyebrow: "Flux",
+        title: "Flux-сеть не обнаружена",
+        message: missingSourceMessage(primaryStation, "Flux-сети"),
+        tone: connectionMeta.tone === "good" ? "muted" : connectionMeta.tone,
+      });
 
   const heroContent = `
-    <section class="overview-stage">
-      <article class="overview-banner" style="--hero-art:url('${heroArt}')">
-        <div class="overview-banner__backdrop"></div>
-
-        <div class="overview-banner__content">
-          <p class="overview-banner__eyebrow">Central control</p>
-          <h3 class="overview-banner__title">
-            ${hasLiveData ? "Комплекс на линии и готов к управлению" : "Панель уже готова, осталось дождаться первого пакета"}
-          </h3>
-          <p class="overview-banner__lead">
-            ${
-              hasLiveData
-                ? "Главная страница теперь работает как оперативный мостик: здесь сразу видно генерацию, нагрузку сети, состояние контуров и последние сигналы со станции."
-                : "Даже без телеметрии главный экран больше не пустует: он показывает подготовленный стенд комплекса, контроль синхронизации и витрину реакторов, которые скоро появятся в онлайне."
-            }
-          </p>
-
-          <div class="overview-banner__chips">
-            <span class="${stateToneClass(hasLiveData ? "good" : "warn")}">
-              ${hasLiveData ? "Станция отвечает" : "Ожидание станции"}
-            </span>
-            <span class="badge badge--muted">${data.overview.activeReactors} / ${totalReactors} контуров активны</span>
-            <span class="badge badge--muted">${queuedCommands} команд в очереди</span>
-          </div>
-
-          <div class="overview-banner__stats">
-            <div>
-              <span>Буфер Flux</span>
-              <strong>${formatEnergy(data.overview.totalFluxBuffer)}</strong>
+    <section class="overview-grid">
+      <div class="overview-grid__main">
+        <article class="command-deck" style="--hero-art:url('${heroArt}')">
+          <div class="command-deck__visual"></div>
+          <div class="command-deck__copy">
+            <p class="command-deck__eyebrow">OpenComputers monitoring</p>
+            <h3 class="command-deck__title">
+              ${hasLiveData ? `Реакторный комплекс — уровень ${highestLevel || primaryReactor.level}` : "Реакторный комплекс — ожидание связи"}
+            </h3>
+            <p class="command-deck__lead">
+              ${
+                hasLiveData
+                  ? "Онлайн-мониторинг показывает актуальное состояние реакторов, потоков Flux и МЭ-сети без ухода с главной страницы."
+                  : "Главный экран уже работает как пульт комплекса и честно показывает, какие подсистемы ещё не подключились и каких данных пока не хватает."
+              }
+            </p>
+            <div class="command-deck__chips">
+              <span class="${stateToneClass(connectionMeta.tone)}">${connectionMeta.label}</span>
+              <span class="badge badge--muted">${queuedCommands} команд в очереди</span>
+              <span class="badge badge--muted">${data.syncIntervalSeconds || 45}с цикл обмена</span>
             </div>
-            <div>
-              <span>Низкотемпературный хладагент</span>
-              <strong>${formatFluid(data.overview.lowTempCoolantTotal)}</strong>
-            </div>
-            <div>
-              <span>Средняя эффективность</span>
-              <strong>${efficiency}%</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="overview-banner__meter">
-          <p class="overview-banner__eyebrow">Output pulse</p>
-          <h4 class="overview-banner__metric">${formatRate(data.overview.totalGeneration)}</h4>
-          <p class="overview-banner__meta">
-            ${hasLiveData ? `Последний пакет получен ${relativeAgeText(data.overview.latestStationReportAt)}` : "Ожидаем первую телеметрию от OpenComputers и загрузку живых графиков."}
-          </p>
-          <div class="overview-banner__chart">
-            ${renderLineChart(heroHistory.length ? heroHistory : [18, 22, 24, 28, 33, 36, 42, 39, 45, 47, 44, 52], { width: 560, height: 190 })}
-          </div>
-          <div class="overview-banner__split">
-            <div>
-              <span>Производство</span>
-              <strong>${formatRate(data.overview.totalFluxInput)}</strong>
-            </div>
-            <div>
-              <span>Выдача</span>
-              <strong>${formatRate(data.overview.totalFluxOutput)}</strong>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <div class="overview-aside">
-        <article class="overview-side-card">
-          <div class="overview-side-card__head">
-            <div>
-              <p class="panel__eyebrow">Sync pulse</p>
-              <h3>Контроль синхронизации</h3>
-            </div>
-          </div>
-
-          <div class="overview-side-card__stats">
-            <div>
-              <span>Цикл обновления</span>
-              <strong>${data.syncIntervalSeconds || 45}с</strong>
-            </div>
-            <div>
-              <span>Последний пакет</span>
-              <strong>${hasLiveData ? relativeAgeText(data.overview.latestStationReportAt) : "нет данных"}</strong>
-            </div>
-            <div>
-              <span>Энергия в МЭ</span>
-              <strong>${meStored ? formatAe(meStored) : "—"}</strong>
-            </div>
-            <div>
-              <span>Связь с сетью Flux</span>
-              <strong>${flux ? "активна" : "ожидание"}</strong>
+            <div class="command-deck__metrics">
+              <article class="deck-stat">
+                <div class="deck-stat__icon">${icon("clock")}</div>
+                <div>
+                  <p>Последний пакет</p>
+                  <strong>${hasLiveData ? relativeAgeText(data.overview.latestStationReportAt) : "нет данных"}</strong>
+                  <span>${connectionMeta.message}</span>
+                </div>
+              </article>
+              <article class="deck-stat">
+                <div class="deck-stat__icon">${icon("reactor")}</div>
+                <div>
+                  <p>Реакторов найдено</p>
+                  <strong>${totalReactors || 0}</strong>
+                  <span>${data.overview.activeReactors} активны</span>
+                </div>
+              </article>
+              <article class="deck-stat">
+                <div class="deck-stat__icon">${icon("bolt")}</div>
+                <div>
+                  <p>Общая генерация</p>
+                  <strong>${hasLiveData ? formatRate(data.overview.totalGeneration) : "нет данных"}</strong>
+                  <span>${flux ? `Flux буфер ${formatEnergy(flux.buffer)}` : "Flux ещё не обнаружен"}</span>
+                </div>
+              </article>
+              <article class="deck-stat">
+                <div class="deck-stat__icon">${icon("network")}</div>
+                <div>
+                  <p>ME-сеть</p>
+                  <strong>${me ? (me.online ? "онлайн" : "оффлайн") : "нет данных"}</strong>
+                  <span>${me ? formatAe(meStored) : "Сеть пока не прислана агентом"}</span>
+                </div>
+              </article>
+              <article class="deck-stat">
+                <div class="deck-stat__icon">${icon("plug")}</div>
+                <div>
+                  <p>Низкотемпературный хладагент</p>
+                  <strong>${me?.lowTempCoolant ? formatFluid(me.lowTempCoolant.amount) : "нет данных"}</strong>
+                  <span>${me?.lowTempCoolant ? me.lowTempCoolant.label : "В МЭ отчёте ещё нет нужной жидкости"}</span>
+                </div>
+              </article>
             </div>
           </div>
         </article>
 
-        <article class="overview-side-card overview-side-card--showcase">
-          <div class="overview-side-card__head">
-            <div>
-              <p class="panel__eyebrow">Showcase</p>
-              <h3>Быстрый обзор контуров</h3>
-            </div>
-          </div>
-          <div class="overview-preview-grid">
-            ${showcaseCards}
-          </div>
-        </article>
+        ${panel("Реакторы", "Reactors", reactorSectionContent, "panel--span-2")}
+
+        <section class="overview-lower-grid">
+          ${panel("Генерация энергии", "RF/t", generationPanelContent, "panel--wide")}
+          ${panel("Сетевая топология", "Flux", topologyPanelContent)}
+          ${panel("Последние события", "Logs", renderLogRows(entries), "")}
+        </section>
       </div>
+
+      <aside class="overview-rail">
+        ${panel("ME-сеть", "ME", mePanelContent, "panel--compact")}
+        ${panel("Flux-сеть", "Flux", fluxPanelContent, "panel--compact")}
+        ${panel(
+          "Связь и команды",
+          "Control",
+          `${renderStatusSurface({
+            iconName: "server",
+            eyebrow: "Station link",
+            title: connectionMeta.label,
+            message: connectionMeta.message,
+            tone: connectionMeta.tone,
+            rows: commandRows,
+          })}`,
+          "panel--compact"
+        )}
+      </aside>
     </section>
 
     <section class="tile-grid">
-      ${metricTile("reactor", "Активные реакторы", `${data.overview.activeReactors} / ${totalReactors}`, "Сколько контуров сейчас реально в работе.", data.overview.hasLiveData ? "good" : "warn")}
-      ${metricTile("shield", "Средняя эффективность", `${efficiency}%`, "Оценка по охлаждению, температуре и текущей генерации.")}
-      ${metricTile("bolt", "Выдача в сеть", formatRate(data.overview.totalFluxOutput), "Текущий поток в Flux.", "accent")}
-      ${metricTile("battery", "Буфер Flux", formatEnergy(data.overview.totalFluxBuffer), flux ? `Пиковый буфер: ${formatEnergy(flux.historySummary?.peakBuffer || 0)}` : "История появится после первых пакетов.")}
-    </section>
-
-    <section class="content-grid">
-      ${panel(
-        "Приоритетные реакторы",
-        "Reactors",
-        `
-          <div class="mini-reactor-grid">
-            ${
-              sortedReactors.length
-                ? sortedReactors
-                    .slice(0, 3)
-                    .map((reactor) => {
-                      const meta = reactorStateMeta(reactor);
-                      return `
-                        <article class="mini-reactor">
-                          <div class="mini-reactor__head">
-                            <div>
-                              <h4>${escapeHtml(reactor.name)}</h4>
-                              <p>${escapeHtml(reactor.stationName)}</p>
-                            </div>
-                            <span class="${meta.badgeClass}">${meta.label}</span>
-                          </div>
-                          <div class="mini-reactor__stats">
-                            <span>${formatRate(reactor.energyGeneration)}</span>
-                            <span>${coolingLabel(reactor)}</span>
-                            <span>${reactorEfficiency(reactor)}%</span>
-                          </div>
-                        </article>
-                      `;
-                    })
-                    .join("")
-                : SHOWCASE_LEVELS.slice(0, 3)
-                    .map(
-                      (level) => `
-                        <article class="mini-reactor mini-reactor--placeholder">
-                          <div class="mini-reactor__head">
-                            <div>
-                              <h4>Реактор уровня ${level}</h4>
-                              <p>Ожидание телеметрии</p>
-                            </div>
-                            <span class="badge badge--muted">Standby</span>
-                          </div>
-                          <div class="mini-reactor__stats">
-                            <span>—</span>
-                            <span>—</span>
-                            <span>—</span>
-                          </div>
-                        </article>
-                      `
-                    )
-                    .join("")
-            }
-          </div>
-        `,
-        "panel--span-2"
-      )}
-
-      ${panel(
-        "Распределение генерации",
-        "Energy split",
-        renderDonutChart(
-          (sortedReactors.length ? sortedReactors.slice(0, 4) : SHOWCASE_LEVELS.slice(0, 4).map((level) => ({ name: `Контур ${level}`, energyGeneration: level * 500000 }))).map((reactor, index) => ({
-            label: reactor.name,
-            value: reactor.energyGeneration || (index + 1) * 350000,
-            color: ["#46f8a7", "#33d1ff", "#86ff6f", "#ffc46b"][index % 4],
-            formatter: formatRate,
-          }))
-        ),
-        "panel--compact"
-      )}
-
-      ${panel("Свежие события", "Logs", renderLogRows(entries.length ? entries : buildLogEntries(createFallbackData()).slice(0, 4)), "panel--compact")}
+      ${metricTile("reactor", "Активные реакторы", `${data.overview.activeReactors}`, hasLiveData ? `Из ${totalReactors} обнаруженных контуров.` : "Нет живых данных по составу комплекса.", data.overview.hasLiveData ? "good" : "warn")}
+      ${metricTile("shield", "Средняя эффективность", hasLiveData ? `${efficiency}%` : "нет данных", hasLiveData ? "Оценка по охлаждению, температуре и текущей генерации." : "Без реальной телеметрии оценка эффективности не строится.")}
+      ${metricTile("bolt", "Выдача в сеть", hasLiveData ? formatRate(data.overview.totalFluxOutput) : "нет данных", flux ? "Текущий поток в Flux." : "Flux-сеть пока не прислала измерения.", "accent")}
+      ${metricTile("battery", "Буфер Flux", flux ? formatEnergy(data.overview.totalFluxBuffer) : "нет данных", flux ? `Пиковый буфер: ${formatEnergy(flux.historySummary?.peakBuffer || 0)}` : "Буфер появится после обнаружения Flux-сети.")}
     </section>
   `;
 
@@ -1102,11 +1226,12 @@ function renderReactorsPage(data) {
   const warnings = reactors.filter((reactor) => reactor.state === "warning").length;
   const critical = reactors.filter((reactor) => reactor.state === "critical").length;
   const allowCommands = data.overview.hasLiveData;
+  const primaryStation = getPrimaryStation(data);
 
   return `
     <section class="tile-grid">
-      ${metricTile("reactor", "Активные", `${active}/${reactors.length || SHOWCASE_LEVELS.length}`, "Сколько реакторов сейчас выдают энергию.", active ? "good" : "warn")}
-      ${metricTile("droplet", "Жидкостное охлаждение", `${activeCoolingCount(reactors)}/${reactors.length || SHOWCASE_LEVELS.length}`, "Сколько контуров работают через жидкостную схему.")}
+      ${metricTile("reactor", "Активные", `${active}/${reactors.length}`, reactors.length ? "Сколько реакторов сейчас выдают энергию." : "Список реакторов появится после первого отчёта.", active ? "good" : "warn")}
+      ${metricTile("droplet", "Жидкостное охлаждение", `${activeCoolingCount(reactors)}/${reactors.length}`, reactors.length ? "Сколько контуров работают через жидкостную схему." : "Пока нет данных о схеме охлаждения.")}
       ${metricTile("shield", "Предупреждения", `${warnings}`, "Реакторы требуют внимания, но ещё не в критике.", warnings ? "warn" : "good")}
       ${metricTile("alert", "Критические", `${critical}`, "Контуры с опасным остатком охлаждения или нагрузкой.", critical ? "danger" : "good")}
     </section>
@@ -1122,24 +1247,30 @@ function renderReactorsPage(data) {
           </section>
         `
         : `
-          <section class="reactor-grid">
-            ${SHOWCASE_LEVELS.map(
-              (level) => `
-                <article class="reactor-card reactor-card--placeholder" style="--reactor-art:url('assets/reactors/level-${level}.webp')">
-                  <div class="reactor-card__art"></div>
-                  <div class="reactor-card__body">
-                    <div class="reactor-card__head">
-                      <div>
-                        <h3>Реактор ${level}</h3>
-                        <p>Ожидание телеметрии</p>
-                      </div>
-                      <span class="badge badge--muted">Standby</span>
-                    </div>
-                    <p class="reactor-card__placeholder-copy">После первого пакета здесь появятся уровень, охлаждение, температура, генерация и кнопки управления.</p>
-                  </div>
-                </article>
-              `
-            ).join("")}
+          <section class="status-grid">
+            ${renderStatusSurface({
+              iconName: "server",
+              eyebrow: "Station link",
+              title: primaryStation ? "Станция не прислала реакторы" : "Нет подключения к станции",
+              message: primaryStation
+                ? "Станция на связи, но в последнем отчёте нет массива reactors."
+                : "Пока не придёт первый пакет от OpenComputers, карточки реакторов построить нельзя.",
+              tone: primaryStation ? "muted" : "warn",
+            })}
+            ${renderStatusSurface({
+              iconName: "power",
+              eyebrow: "Commands",
+              title: "Управление недоступно",
+              message: "Кнопки включения и выключения откроются только после появления живой станции и списка реакторов.",
+              tone: "muted",
+            })}
+            ${renderStatusSurface({
+              iconName: "reactor",
+              eyebrow: "Telemetry",
+              title: "Нет телеметрии по контурам",
+              message: "Нужны реальные поля уровня, охлаждения, температуры и генерации из агента OpenComputers.",
+              tone: "muted",
+            })}
           </section>
         `
     }
@@ -1162,54 +1293,85 @@ function renderEnergyPage(data) {
           color: ["#46f8a7", "#33d1ff", "#86ff6f", "#ffc46b", "#a47df5", "#ff7b72"][index % 6],
           formatter: formatRate,
         }))
-    : [
-        { label: "Реакторы", value: 14800000, color: "#46f8a7", formatter: formatRate },
-        { label: "Накопители", value: 3200000, color: "#33d1ff", formatter: formatRate },
-        { label: "Потребление", value: 1600000, color: "#ffc46b", formatter: formatRate },
-      ];
+    : [];
+  const primaryStation = getPrimaryStation(data);
 
   return `
     <section class="tile-grid">
-      ${metricTile("battery", "Буфер Flux", formatEnergy(data.overview.totalFluxBuffer), flux ? `Средний буфер: ${formatEnergy(avgBuffer)}` : "История появится после первых пакетов.", "accent")}
-      ${metricTile("chart", "Вход в сеть", formatRate(data.overview.totalFluxInput), "Суммарный текущий поток в Flux.")}
-      ${metricTile("bolt", "Выход из сети", formatRate(data.overview.totalFluxOutput), "Нагрузка на сеть и потребителей.")}
-      ${metricTile("power", "Энергия в МЭ", getPrimaryStation(data)?.me ? formatAe(getPrimaryStation(data).me.storedPower) : "—", "Если МЭ-интерфейс доступен, запас энергии виден здесь.")}
+      ${metricTile("battery", "Буфер Flux", flux ? formatEnergy(data.overview.totalFluxBuffer) : "нет данных", flux ? `Средний буфер: ${formatEnergy(avgBuffer)}` : "Flux-сеть ещё не найдена в отчётах.", "accent")}
+      ${metricTile("chart", "Вход в сеть", flux ? formatRate(data.overview.totalFluxInput) : "нет данных", flux ? "Суммарный текущий поток в Flux." : "Нет данных о входящем потоке.")}
+      ${metricTile("bolt", "Выход из сети", flux ? formatRate(data.overview.totalFluxOutput) : "нет данных", flux ? "Нагрузка на сеть и потребителей." : "Нет данных о выходящем потоке.")}
+      ${metricTile("power", "Энергия в МЭ", getPrimaryStation(data)?.me ? formatAe(getPrimaryStation(data).me.storedPower) : "нет данных", getPrimaryStation(data)?.me ? "Если МЭ-интерфейс доступен, запас энергии виден здесь." : "ME-интерфейс ещё не прислал энергетические показатели.")}
     </section>
 
     <section class="energy-layout">
       ${panel(
         "Тренд буфера Flux",
         "Flux history",
-        `
-          <div class="chart-block">
-            <div class="chart-block__summary">
-              <strong>${flux ? formatEnergy(flux.buffer) : "—"}</strong>
-              <span>${flux ? `Пиковое значение ${formatEnergy(flux.historySummary?.peakBuffer || 0)}` : "Ожидание замеров от сети."}</span>
-            </div>
-            ${renderLineChart(bufferSeries.length ? bufferSeries : [18, 22, 28, 24, 35, 42, 39, 48, 45, 52, 49, 56], { width: 820, height: 280 })}
-          </div>
-        `,
+        flux && history.length
+          ? `
+              <div class="chart-block">
+                <div class="chart-block__summary">
+                  <strong>${formatEnergy(flux.buffer)}</strong>
+                  <span>Пиковое значение ${formatEnergy(flux.historySummary?.peakBuffer || 0)}</span>
+                </div>
+                ${renderLineChart(bufferSeries, { width: 820, height: 280 })}
+              </div>
+            `
+          : renderStatusSurface({
+              iconName: "chart",
+              eyebrow: "Flux history",
+              title: "История буфера недоступна",
+              message: missingSourceMessage(primaryStation, "истории Flux"),
+              tone: primaryStation ? (primaryStation.isStale ? "danger" : "muted") : "warn",
+            }),
         "panel--span-2"
       )}
 
       ${panel(
         "Последние пакеты",
         "Buffer columns",
-        renderHistoryColumns(history, formatEnergy),
+        flux && history.length
+          ? renderHistoryColumns(history, formatEnergy)
+          : renderStatusSurface({
+              iconName: "battery",
+              eyebrow: "Packets",
+              title: "Нет замеров по пакетам",
+              message: "Нужна хотя бы одна серия пакетов от Flux-сети, чтобы построить столбики.",
+              tone: primaryStation ? "muted" : "warn",
+            }),
         "panel--compact"
       )}
 
       ${panel(
         "Вход / выход по пакетам",
         "Input vs output",
-        renderInputOutputBars(history),
+        flux && history.length
+          ? renderInputOutputBars(history)
+          : renderStatusSurface({
+              iconName: "plug",
+              eyebrow: "Input / output",
+              title: "Нет потока для сравнения",
+              message: "Когда Flux начнёт отдавать вход и выход по тикам, здесь появится сравнение каналов.",
+              tone: primaryStation ? "muted" : "warn",
+            }),
         "panel--compact"
       )}
 
       ${panel(
         "Распределение генерации",
         "Output share",
-        renderDonutChart(reactorSegments),
+        reactorSegments.length
+          ? renderDonutChart(reactorSegments)
+          : renderStatusSurface({
+              iconName: "network",
+              eyebrow: "Output share",
+              title: "Нет данных для распределения",
+              message: reactors.length
+                ? "Реакторы сейчас не выдают энергию, поэтому распределять пока нечего."
+                : missingSourceMessage(primaryStation, "генерации реакторов"),
+              tone: primaryStation ? "muted" : "warn",
+            }),
         "panel--span-2"
       )}
     </section>
